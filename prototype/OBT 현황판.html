@@ -388,12 +388,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .clip{z-index:6}
 
 /* papers */
-.note{background-color:transparent!important;background-position:center!important;background-size:100% 100%!important;background-repeat:no-repeat!important;box-shadow:none!important;filter:drop-shadow(0 10px 8px rgba(40,22,6,.36));
-  padding:34px 30px 34px 28px!important;min-height:0!important}
-.note::before,.note::after{display:none!important}
-.note{background:none!important}
-.note > img.paper,.date-wrap > img.paper{position:absolute!important;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.note.n-plan{padding-top:58px!important}
+
 .note-h{padding-right:64px;margin-bottom:14px;border-bottom:1.5px dashed rgba(47,41,36,.28)}
 .note-h .st-img{position:absolute;top:-22px;right:-26px;z-index:5}
 .postmark{position:absolute;right:56px;top:-2px;width:64px;opacity:.4}
@@ -441,9 +436,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .s-txt{left:20%;top:13%;width:46%;height:42%;transform:rotate(-15deg);font-size:clamp(24px,7cqi,30px);font-weight:700;letter-spacing:-.02em;line-height:1.05}
 
 /* ===== v4 ===== */
-.note{padding:46px 26px 30px 24px!important;filter:drop-shadow(0 1px 1px rgba(40,22,6,.28)) drop-shadow(0 12px 10px rgba(40,22,6,.32))}
-.note.n-plan{padding-top:50px!important}
-.note.n-ride{padding-top:36px!important}
+.note{padding:36px 22px 30px!important;min-height:250px!important;z-index:1}
+.notes{margin:0 -6px}
 .shade{position:absolute;inset:0;z-index:0;pointer-events:none;
   -webkit-mask:var(--m) center/100% 100% no-repeat;mask:var(--m) center/100% 100% no-repeat;
   background:
@@ -479,7 +473,51 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .sbtn .ic{background:rgba(255,253,248,.55)!important}
 .pclip{position:absolute;width:15px;height:auto;left:16px;top:-14px;z-index:3;transform:rotate(-6deg);pointer-events:none;
   filter:drop-shadow(1px 2px 1px rgba(40,22,6,.35))}
-.locs .sbtn .pclip{left:auto;right:42px;transform:rotate(8deg)}
+
+/* ===== v5 ===== */
+/* ctrl block */
+.ctrl{padding:118px 22px 30px!important}
+
+.nametag{left:-10px!important;top:26px!important;width:146px!important;transform:rotate(-9deg)}
+.bulb{width:54px;right:-6px;top:8px;transform:rotate(16deg);z-index:9!important}
+.sbtn .pclip{width:20px;left:-4px;right:auto;top:calc(50% - 24px);transform:rotate(90deg)!important;z-index:5}
+.sbtn.ride .pclip{left:auto;right:-4px;transform:rotate(-90deg)!important}
+.sbtn.plan{width:calc(100% + 36px);margin:0 -18px;padding-left:76px}
+.sbtn.room{width:calc(100% + 18px);margin-left:-18px;padding-left:18px}
+.sbtn.ride{width:calc(100% + 18px);margin-right:-18px}
+.locs .sbtn{padding-top:46px!important;min-height:104px}
+.ico{position:absolute;z-index:4;pointer-events:none}
+.i-star1{width:38px;left:16px;top:8px;transform:rotate(-14deg)}
+.i-star2{width:28px;left:40px;top:22px;transform:rotate(18deg)}
+.i-sofa{width:78px;left:10px;top:-18px;transform:rotate(-7deg)}
+.i-sign{width:50px;left:12px;top:-22px;transform:rotate(11deg)}
+.tick{top:12px;right:16px}
+/* header */
+.mega-wrap{position:relative;width:92px;margin:56px 0 0 -4px}
+.mega-wrap .mega{position:relative!important;width:92px!important;margin:0!important;z-index:2}
+.mega-wrap .ahhh{position:absolute;width:118px;left:-2px;top:-64px;z-index:1;transform:rotate(-7deg);
+  filter:drop-shadow(1.6px 0 0 #f6f1e6) drop-shadow(-1.6px 0 0 #f6f1e6) drop-shadow(0 1.6px 0 #f6f1e6) drop-shadow(0 -1.6px 0 #f6f1e6) drop-shadow(0 4px 3px rgba(40,22,6,.35)) saturate(.88)}
+.head .nt-sign{top:128px!important}
+/* bg decor */
+#board{position:relative;z-index:1}
+.poster{position:absolute;right:-30px;bottom:-20px;width:250px;z-index:0;opacity:.95;transform:rotate(-6deg);pointer-events:none;
+  filter:drop-shadow(0 8px 8px rgba(40,22,6,.35)) saturate(.8) sepia(.12)}
+.notes{position:relative}
+.fish-row{position:relative;height:0;margin:-26px 0;z-index:0}
+.fish-row img{position:absolute;right:-34px;top:-44px;width:250px;transform:rotate(-4deg);
+  filter:drop-shadow(0 6px 5px rgba(40,22,6,.35)) saturate(.85) sepia(.1)}
+@container app (min-width:760px){ .fish-row{display:none} }
+/* matte printed badge finish */
+.logo-st::after,.mini::after{
+  background:
+    radial-gradient(ellipse 70% 55% at 34% 26%, rgba(255,255,255,.2), rgba(255,255,255,0) 70%),
+    radial-gradient(circle at 50% 50%, transparent 74%, rgba(20,10,0,.10) 88%, rgba(20,10,0,.28) 100%),
+    var(--noise)!important;
+  background-size:auto,auto,90px!important;mix-blend-mode:normal!important;opacity:1!important;
+  box-shadow:inset 0 0 0 1px rgba(20,10,0,.22), inset 1.5px 2px 2px rgba(255,255,255,.22), inset -2px -3px 4px rgba(20,10,0,.22)!important}
+.logo-st,.mini{filter:saturate(.82) contrast(.96) sepia(.12)!important}
+.logo-st::before{opacity:.45!important}
+
 /* badges spaced, not overlapping */
 .mini.m1{width:38px;height:38px;left:-46px;top:4px}
 .mini.m2{width:30px;height:30px;left:-38px;top:52px}
@@ -515,6 +553,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
   <span class="tag">DEV</span>
 </div>
 <div id="app"><div class="cork grain">
+<img class="poster deco" src="assets/cut/poster.png" alt="" aria-hidden="true">
 <img class="wm deco" src="assets/oz-logo.png" alt="" aria-hidden="true">
 <img class="wm wm2 deco" src="assets/oz-logo.png" alt="" aria-hidden="true">
 <img class="wm wm-top deco" src="assets/oz-logo.png" alt="" aria-hidden="true">
@@ -550,7 +589,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <span class="logo-st"></span>
         <span class="mini m1"></span><span class="mini m2"></span><span class="mini m3"></span>
       </div>
-      <img class="mega cut deco" src="assets/cut/p-mega.png" alt="" aria-hidden="true">
+      <div class="mega-wrap deco" aria-hidden="true"><img class="ahhh" src="assets/cut/ahhh.png" alt=""><img class="mega cut" src="assets/cut/p-mega.png" alt=""></div>
       <div class="nt nt-sign" role="note" aria-label="Notice: 동방 깨끗이 사용!">
         <img class="nt-img" src="assets/cut/sign.png" alt="" aria-hidden="true">
         <div class="nt-txt s-txt">동방<br>깨끗이<br>사용!</div>
@@ -558,17 +597,16 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
     </header>
 
     <div class="ctrl-wrap">
-    <img class="cut deco" src="assets/cut/p-bulb.png" alt="" aria-hidden="true" style="width:48px;right:-12px;top:-30px;transform:rotate(18deg);z-index:6">
+    <img class="cut deco bulb" src="assets/cut/p-bulb.png" alt="" aria-hidden="true">
     <section class="ctrl" aria-labelledby="ctrlTitle">
-      <img class="paper deco" src="assets/cut/note-gray-s.png" alt="" aria-hidden="true">
+      <img class="paper deco" src="assets/cut/note-gray-pk.png" alt="" aria-hidden="true">
       <div class="nametag" aria-hidden="true"><img src="assets/cut/nametag.png" alt=""><span class="nt-name" id="myName"></span></div>
       <h2 id="ctrlTitle" class="sr">My status</h2>
-      <div class="rc-top deco" aria-hidden="true"><span>MY STATUS</span><span id="rcNo">NO.0001</span></div>
       <div class="btns">
         <button class="sbtn plan" id="bPlan" type="button" aria-pressed="false">
           <img class="slip" src="assets/cut/card-s.png" alt="" aria-hidden="true"><span class="tint" aria-hidden="true"></span>
           <img class="pclip" src="assets/cut/paperclip.png" alt="" aria-hidden="true">
-          <span class="ic" data-ic="star" data-c="#d6b565" data-s="20"></span>
+          <img class="cut ico i-star1" src="assets/cut/star-gold.png" alt=""><img class="cut ico i-star2" src="assets/cut/star-holo.png" alt="">
           <span class="lbl">Riding today</span>
           <span class="sw" aria-hidden="true"><span class="swt">OFF</span><span class="trk"></span></span>
         </button>
@@ -577,14 +615,14 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
           <button class="sbtn room" id="bRoom" type="button" aria-pressed="false">
           <img class="slip" src="assets/cut/card-s.png" alt="" aria-hidden="true"><span class="tint" aria-hidden="true"></span>
           <img class="pclip" src="assets/cut/paperclip.png" alt="" aria-hidden="true">
-            <span class="ic" data-ic="door" data-c="#a8b796" data-s="20"></span>
+            <img class="cut ico i-sofa" src="assets/cut/sofa.png" alt="">
             <span class="lbl">In the club room<span class="state-word">Tap to mark</span></span>
             <span class="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6" fill="none" stroke="#f6f2ea" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </button>
           <button class="sbtn ride" id="bRide" type="button" aria-pressed="false">
           <img class="slip" src="assets/cut/card-s.png" alt="" aria-hidden="true"><span class="tint" aria-hidden="true"></span>
           <img class="pclip" src="assets/cut/paperclip.png" alt="" aria-hidden="true">
-            <span class="ic" data-ic="board" data-c="#9db1c0" data-s="22"></span>
+            <img class="cut ico i-sign" src="assets/cut/skatesign.png" alt="">
             <span class="lbl">Out riding<span class="state-word">Tap to mark</span></span>
             <span class="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6" fill="none" stroke="#f6f2ea" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </button>
@@ -598,7 +636,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 
     <div class="notes">
       <section class="note paper-noise n-plan" aria-labelledby="h-plan">
-        <img class="paper deco" src="assets/cut/note-pink-s.png" alt="" aria-hidden="true">
+        <img class="pinimg deco" src="assets/cut/p-pin.png" alt="" aria-hidden="true" style="top:-24px;left:50%;margin-left:-18px">
         <img class="cut deco" src="assets/cut/star-red.png" alt="" aria-hidden="true" style="width:34px;left:-14px;bottom:26px;transform:rotate(-12deg)">
         <div class="note-h">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 01</span>
@@ -606,15 +644,14 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
           <span class="note-sub deco" aria-hidden="true">riding today</span>
           <span class="count"><b id="c-plan">0</b> <span class="ppl">people</span></span></div>
           <svg class="postmark deco" viewBox="0 0 96 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="#173b27" stroke-width="1.6"/><circle cx="22" cy="22" r="13" fill="none" stroke="#173b27" stroke-width="1"/><text x="22" y="25" text-anchor="middle" font-size="8" font-weight="800" fill="#173b27" font-family="Pretendard Variable, sans-serif">OBT</text><path d="M44 12 q6 -4 12 0 t12 0 t12 0 t12 0 M44 22 q6 -4 12 0 t12 0 t12 0 t12 0 M44 32 q6 -4 12 0 t12 0 t12 0 t12 0" fill="none" stroke="#173b27" stroke-width="1.5"/></svg>
-          <img class="st-img deco" src="assets/cut/s-lucky.png" alt="" aria-hidden="true" style="width:56px">
+          <img class="st-img deco" src="assets/cut/goskate.png" alt="" aria-hidden="true" style="width:96px;transform:rotate(9deg);top:-30px;right:-30px">
         </div>
         <div class="stickers" id="l-plan" role="list"></div>
         <p class="empty" id="e-plan" hidden><span data-ic="star" data-c="#f4eee2" data-s="24" aria-hidden="true"></span>Nobody's planning to ride yet</p>
       </section>
 
       <section class="note paper-noise n-room" aria-labelledby="h-room">
-        <img class="paper deco" src="assets/cut/note-yellow-s.png" alt="" aria-hidden="true">
-        
+        <img class="clip deco" src="assets/cut/cGreen2.png" alt="" aria-hidden="true" style="width:60px;top:-50px;left:24%;transform:rotate(-3deg)">
         <div class="note-h">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 02</span>
           <h2 id="h-room" aria-label="in the club room now"><span class="ransom" data-ransom="CLUB" aria-hidden="true"></span></h2>
@@ -627,9 +664,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <p class="empty" id="e-room" hidden><span data-ic="bubbles" data-c="#f4eee2" data-s="24" aria-hidden="true"></span>The club room is quiet for now</p>
       </section>
 
+      <div class="fish-row deco" aria-hidden="true"><img src="assets/cut/fish.png" alt=""></div>
       <section class="note paper-noise n-ride" aria-labelledby="h-ride">
-        <img class="paper deco" src="assets/cut/card-s.png" alt="" aria-hidden="true">
         <img class="clip deco" src="assets/cut/cMint.png" alt="" aria-hidden="true" style="width:54px;top:-50px;left:62%;transform:rotate(5deg)">
+        <span class="tape deco" aria-hidden="true" style="top:-10px;right:-12px;width:62px;transform:rotate(38deg);--tc:rgba(176,160,190,.7)"></span>
         <div class="note-h">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 03</span>
           <h2 id="h-ride" aria-label="out riding now"><span class="ransom" data-ransom="RIDING" aria-hidden="true"></span></h2>
@@ -724,7 +762,7 @@ const save = () => localStorage.setItem(KEY, JSON.stringify(me));
 /* ---------- date ---------- */
 const d = new Date(), days = ['SUN','MON','TUE','WED','THU','FRI','SAT'], mons = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 $('#today').textContent = `${days[d.getDay()]} · ${String(d.getDate()).padStart(2,'0')} ${mons[d.getMonth()]} ${d.getFullYear()}`;
-$('#rcNo').textContent = 'NO.' + String(d.getDate()*37 % 9000 + 1000);
+
 
 /* ---------- stickers ---------- */
 function hash(s){ let h=0; for (const ch of s) h = (h*31 + ch.charCodeAt(0))|0; return Math.abs(h); }
