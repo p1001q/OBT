@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OBT — Today's Board</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Reenie+Beanie&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Gaegu:wght@400;700&family=Reenie+Beanie&display=swap">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -19,6 +19,7 @@
   --f-body:var(--f-title);
   --f-mono:'Courier Prime', ui-monospace, monospace;
   --f-hand:'Reenie Beanie', var(--f-title);
+  --f-marker:'Gaegu', var(--f-title);
   --oz:#173b27;
   --stain:rgba(122,82,34,.22);
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .9 -.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -212,7 +213,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .notes{display:grid;gap:28px}
 .note{position:relative;border-radius:1px;padding:26px 16px 20px;min-height:150px;
   box-shadow:0 1px 1px rgba(0,0,0,.06), 0 14px 16px -12px rgba(40,22,6,.6)}
-.note > *:not(.coffee):not(.pin):not(.tape){position:relative}
+.note > *:not(.coffee):not(.pin):not(.tape):not(.deco){position:relative}
 .note.n-plan{background-color:#dfcb98;transform:rotate(-1deg)}
 .note.n-plan::after{content:"";position:absolute;right:0;bottom:0;width:30px;height:30px;pointer-events:none;
   background:linear-gradient(315deg, #a3794c 0 50%, #ece0c2 50% 60%, #d2bd88 100%);clip-path:polygon(100% 0,100% 100%,0 100%);
@@ -368,6 +369,84 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
   .title .ransom{--rh:56px}
   .note-h h2 .ransom{--rh:26px}
 }
+/* ===== v3 ===== */
+/* convex badges */
+.logo-st{box-shadow:0 7px 8px -2px rgba(40,22,6,.55), 0 2px 2px rgba(40,22,6,.3)!important;filter:sepia(.2) saturate(.9)}
+.logo-st::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--noise);background-size:110px;opacity:.3;mix-blend-mode:multiply}
+.logo-st::after,.mini::after{content:"";position:absolute;inset:0;border-radius:50%;opacity:1;mix-blend-mode:normal;
+  background:radial-gradient(circle at 32% 24%, rgba(255,255,255,.7) 0, rgba(255,255,255,.18) 22%, rgba(255,255,255,0) 42%),
+             radial-gradient(circle at 50% 46%, transparent 56%, rgba(30,15,5,.16) 78%, rgba(30,15,5,.42) 100%);
+  box-shadow:inset 0 2px 2px rgba(255,255,255,.5), inset 0 -3px 5px rgba(30,15,5,.3)}
+.mini{box-shadow:0 5px 5px -1px rgba(40,22,6,.5), 0 1px 1px rgba(40,22,6,.3)!important}
+.title{position:relative;display:inline-block}
+.t-star{position:absolute;width:34px;right:-22px;top:-12px;transform:rotate(14deg);filter:drop-shadow(0 3px 2px rgba(40,22,6,.4))}
+.date-wrap{position:relative;transform:rotate(2deg);filter:drop-shadow(0 4px 3px rgba(40,22,6,.4))}
+.date-tag{background:none!important;box-shadow:none!important;transform:none!important;
+  padding:10px 18px 9px!important;color:#3a2a1b!important}
+.date-tag::before,.date-tag::after{display:none}
+
+/* hardware sits on the paper edge */
+.clip{z-index:6}
+
+/* papers */
+.note{background-color:transparent!important;background-position:center!important;background-size:100% 100%!important;background-repeat:no-repeat!important;box-shadow:none!important;filter:drop-shadow(0 10px 8px rgba(40,22,6,.36));
+  padding:34px 30px 34px 28px!important;min-height:0!important}
+.note::before,.note::after{display:none!important}
+.note{background:none!important}
+.note > img.paper,.date-wrap > img.paper{position:absolute!important;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.note.n-plan{padding-top:58px!important}
+.note-h{padding-right:64px;margin-bottom:14px;border-bottom:1.5px dashed rgba(47,41,36,.28)}
+.note-h .st-img{position:absolute;top:-22px;right:-26px;z-index:5}
+.postmark{position:absolute;right:56px;top:-2px;width:64px;opacity:.4}
+.pc-lbl{margin-bottom:8px}
+
+/* masking-tape name stickers */
+.stickers{gap:12px 8px;padding:2px 0 0}
+.sticker{background:none!important;box-shadow:none!important;border-radius:0!important;isolation:isolate;
+  min-height:44px;padding:7px 18px 6px!important;gap:6px;
+  font-family:var(--f-marker);font-weight:700;font-size:23px;letter-spacing:-.01em;color:#272320;
+  filter:drop-shadow(0 2px 1.5px rgba(40,22,6,.26))}
+.sticker::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.93;
+  background:
+    linear-gradient(103deg, transparent 38%, rgba(255,255,255,.28) 39% 41%, transparent 42% 68%, rgba(0,0,0,.05) 69% 70%, transparent 71%),
+    linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,0) 45%, rgba(0,0,0,.06)),
+    var(--fiber), var(--bg);
+  clip-path:polygon(4px 0,calc(100% - 3px) 0,100% 12%,calc(100% - 5px) 26%,calc(100% - 1px) 40%,calc(100% - 6px) 55%,calc(100% - 2px) 70%,calc(100% - 5px) 86%,calc(100% - 1px) 100%,3px 100%,0 88%,5px 74%,1px 60%,6px 45%,0 30%,4px 14%)}
+.sticker.tr-b::before{clip-path:polygon(1px 0,calc(100% - 5px) 0,calc(100% - 1px) 16%,calc(100% - 6px) 32%,100% 47%,calc(100% - 4px) 62%,calc(100% - 1px) 78%,calc(100% - 6px) 100%,5px 100%,1px 84%,6px 68%,2px 52%,5px 36%,0 20%)}
+.sticker .tex{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;pointer-events:none;
+  clip-path:polygon(4px 0,calc(100% - 3px) 0,100% 12%,calc(100% - 5px) 26%,calc(100% - 1px) 40%,calc(100% - 6px) 55%,calc(100% - 2px) 70%,calc(100% - 5px) 86%,calc(100% - 1px) 100%,3px 100%,0 88%,5px 74%,1px 60%,6px 45%,0 30%,4px 14%)}
+.sticker.tx-dots .tex{object-fit:cover;transform:rotate(0)}
+.sticker.tx-dots::before,.sticker.me::before{opacity:0}
+.sticker.tx-dots{color:#1d1a17;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
+
+.sticker.me{padding-right:4px!important}
+.me-star{position:absolute;width:24px;left:-10px;top:-12px;transform:rotate(-14deg);filter:drop-shadow(0 1px 1px rgba(40,22,6,.4))}
+.me-b{width:auto!important;height:auto!important;padding:2px 5px 1px;border-radius:999px!important;background:none!important;color:var(--ink)!important;
+  border:1.5px solid var(--ink);font:700 12px/1 var(--f-mono)!important;letter-spacing:.06em!important;transform:rotate(-6deg)}
+.x span{background:rgba(255,253,248,.55)!important}
+
+.notes{gap:52px!important;padding-top:10px}
+/* notice */
+.notice{position:relative;padding:8px 0 30px}
+.nt-h{margin:0 0 6px;line-height:0;transform:rotate(-1.5deg)}
+.nt-h .ransom{--rh:32px}
+.nt{position:relative}
+.nt-img{display:block;width:100%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 6px rgba(40,22,6,.35))}
+.nt-bubble{width:min(100%,380px);transform:rotate(-2deg)}
+.nt-txt{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  font-family:var(--f-marker);color:#241f1b;word-break:keep-all;line-height:1.15}
+.b-txt{left:3%;width:50%;top:22%;height:52%;gap:6px}
+.b-txt b{font-size:clamp(18px,5.6cqi,24px);font-weight:700;letter-spacing:-.02em}
+.b-txt span{font-size:clamp(14px,4cqi,16px);font-weight:700;line-height:1.2;color:#3b3329}
+.nt-sign{width:min(64%,250px);margin:-44px 0 0 auto;transform:rotate(3deg)}
+.s-txt{left:20%;top:13%;width:46%;height:42%;transform:rotate(-15deg);font-size:clamp(24px,7cqi,30px);font-weight:700;letter-spacing:-.02em;line-height:1.05}
+
+@container app (min-width:760px){
+  .layout{grid-template-areas:"head ctrl" "notes notes" "notice notice"!important}
+  .notice{grid-area:notice;display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:0 30px}
+  .nt-h{grid-column:1/-1}
+  .nt-sign{margin:0;width:250px}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
@@ -396,7 +475,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
       <h1 id="entry-title" class="e-h1"><span class="ransom deco" data-ransom="HEY" style="--rh:40px" aria-hidden="true"></span><img class="ex deco" src="assets/cut/p-ex.png" alt="" aria-hidden="true"><span class="h1t">Write your name on a&nbsp;new sticker</span></h1>
       <p class="sub">It goes straight on the board. No login needed.</p>
       <label class="sr" for="nameIn">Name</label>
-      <input class="field" id="nameIn" name="name" type="text" autocomplete="nickname" maxlength="12" placeholder="e.g. Minseo">
+      <input class="field" id="nameIn" name="name" type="text" autocomplete="nickname" maxlength="12" placeholder="e.g. 김민서">
       <p class="err" id="err" role="alert"></p>
       <button class="go" type="submit">Pin it to the board</button>
     </form>
@@ -409,9 +488,9 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 <main id="board" hidden aria-label="OBT board">
   <div class="layout">
     <header class="head">
-      <h1 class="title" aria-label="OBT — today's board"><span class="ransom" data-ransom="OBT" aria-hidden="true"></span></h1>
+      <h1 class="title" aria-label="OBT — today's board"><span class="ransom" data-ransom="OBT" aria-hidden="true"></span><img class="t-star deco" src="assets/cut/star-holo.png" alt="" aria-hidden="true"></h1>
       <div class="sub-row"><span class="dymo" aria-hidden="true">TODAY'S BOARD</span>
-      <div class="date-tag" id="today"></div></div>
+      <div class="date-wrap"><img class="paper deco" src="assets/cut/kraft.png" alt="" aria-hidden="true"><div class="date-tag" id="today"></div></div></div>
       <div class="badges deco" aria-hidden="true">
         <span class="logo-st"></span>
         <span class="mini m1"></span><span class="mini m2"></span><span class="mini m3"></span>
@@ -419,8 +498,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
       <img class="mega cut deco" src="assets/cut/p-mega.png" alt="" aria-hidden="true">
     </header>
 
-    <div class="ctrl-wrap"><img class="clip deco" src="assets/cut/cBlack.png" alt="" aria-hidden="true" style="width:92px;top:-34px;left:50%;margin-left:-46px;transform:rotate(-2deg)">
-    <img class="cut deco" src="assets/cut/p-bulb.png" alt="" aria-hidden="true" style="width:52px;right:-14px;top:-22px;transform:rotate(16deg);z-index:6">
+    <div class="ctrl-wrap"><img class="clip deco" src="assets/cut/cBlack.png" alt="" aria-hidden="true" style="width:88px;top:-58px;left:50%;margin-left:-44px;transform:rotate(-2deg)">
+    <img class="cut deco" src="assets/cut/p-bulb.png" alt="" aria-hidden="true" style="width:48px;right:-12px;top:-30px;transform:rotate(18deg);z-index:6">
     <section class="ctrl" aria-labelledby="ctrlTitle">
       <div class="rc-top deco" aria-hidden="true"><span>MY STATUS</span><span id="rcNo">NO.0001</span></div>
       <h2 id="ctrlTitle"><span class="nm" id="myName"></span>'s day</h2>
@@ -452,7 +531,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 
     <div class="notes">
       <section class="note paper-noise n-plan" aria-labelledby="h-plan">
-        <img class="pinimg deco" src="assets/cut/p-pin.png" alt="" aria-hidden="true" style="top:-22px;left:50%;margin-left:-18px">
+        <img class="paper deco" src="assets/cut/note-cream.png" alt="" aria-hidden="true">
+        <img class="cut deco" src="assets/cut/star-red.png" alt="" aria-hidden="true" style="width:34px;left:-14px;bottom:26px;transform:rotate(-12deg)">
         <div class="note-h">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 01</span>
           <h2 id="h-plan" aria-label="riding today"><span class="ransom" data-ransom="TODAY" aria-hidden="true"></span></h2>
@@ -466,7 +546,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
       </section>
 
       <section class="note paper-noise n-room" aria-labelledby="h-room">
-        <img class="clip deco" src="assets/cut/cGreen2.png" alt="" aria-hidden="true" style="width:58px;top:-34px;left:26%">
+        <img class="paper deco" src="assets/cut/paper-gray.png" alt="" aria-hidden="true">
+        <img class="clip deco" src="assets/cut/cGreen2.png" alt="" aria-hidden="true" style="width:60px;top:-50px;left:24%;transform:rotate(-3deg)">
         <div class="note-h">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 02</span>
           <h2 id="h-room" aria-label="in the club room now"><span class="ransom" data-ransom="CLUB" aria-hidden="true"></span></h2>
@@ -480,8 +561,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
       </section>
 
       <section class="note paper-noise n-ride" aria-labelledby="h-ride">
-        <img class="clip deco" src="assets/cut/cMint.png" alt="" aria-hidden="true" style="width:52px;top:-36px;left:64%;transform:rotate(6deg)">
-        <span class="tape deco" aria-hidden="true"></span>
+        <img class="paper deco" src="assets/cut/paper-blue.png" alt="" aria-hidden="true">
+        <img class="clip deco" src="assets/cut/cMint.png" alt="" aria-hidden="true" style="width:54px;top:-50px;left:62%;transform:rotate(5deg)">
         <div class="note-h">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 03</span>
           <h2 id="h-ride" aria-label="out riding now"><span class="ransom" data-ransom="RIDING" aria-hidden="true"></span></h2>
@@ -494,6 +575,24 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <p class="empty" id="e-ride" hidden><span data-ic="wheel" data-c="#f4eee2" data-s="24" aria-hidden="true"></span>Nobody's out riding yet</p>
       </section>
     </div>
+
+    <section class="notice" aria-labelledby="h-notice">
+      <h2 id="h-notice" class="nt-h" aria-label="Notice"><span class="ransom" data-ransom="NOTICE" aria-hidden="true"></span></h2>
+      <div class="nt nt-bubble">
+        <img class="nt-img" src="assets/cut/bubble.png" alt="" aria-hidden="true">
+        <img class="cut deco" src="assets/cut/tape-dots.png" alt="" aria-hidden="true" style="width:26px;left:20px;top:-14px;transform:rotate(-28deg)">
+        <div class="nt-txt b-txt">
+          <b>자율 연습은<br>오후 6–7시까지!</b>
+          <span>공용장비는 보드 밑에 숫자 있음. 숫자 없는 건 남의 개인보드!</span>
+        </div>
+      </div>
+      <div class="nt nt-sign">
+        <img class="nt-img" src="assets/cut/sign.png" alt="" aria-hidden="true">
+        <div class="nt-txt s-txt">동방은<br>깨끗이<br>사용!</div>
+      </div>
+      <img class="cut deco" src="assets/cut/star-gold.png" alt="" aria-hidden="true" style="width:34px;left:30px;bottom:60px;transform:rotate(10deg)">
+      <img class="cut deco" src="assets/cut/star-blue.png" alt="" aria-hidden="true" style="width:24px;left:74px;bottom:36px;transform:rotate(-14deg)">
+    </section>
   </div>
 </main>
 
@@ -546,11 +645,11 @@ document.querySelectorAll('[data-beads]').forEach(el => {
 
 /* ---------- mock data ---------- */
 const OTHERS = [
-  { id:'u1', name:'Minseo', bg:'#d9aca3', deco:'flower', dc:'#f2e6cc', rad:'999px', plan:true,  loc:'room' },
-  { id:'u2', name:'Jihoon', bg:'#c99372', deco:'bolt',   dc:'#f0dca6', rad:'8px',   plan:true,  loc:'room' },
-  { id:'u3', name:'Seoyeon', bg:'#b9b0c9', deco:'heart',  dc:'#e8cbc5', rad:'14px 5px 14px 5px', plan:false, loc:'room' },
-  { id:'u4', name:'Minsu', bg:'#b3b98f', deco:'star',   dc:'#f4ecd6', rad:'999px', plan:true,  loc:null },
-  { id:'u5', name:'Minseo K.', bg:'#98adbb', deco:'checker',dc:'',        rad:'5px',   plan:true,  loc:null },
+  { id:'u1', name:'김민서', bg:'#e2bcb3', deco:'flower', dc:'#f2e6cc', rad:'999px', plan:true,  loc:'room' },
+  { id:'u2', name:'박지훈', bg:'#d8c49a', deco:'bolt',   dc:'#f0dca6', rad:'8px',   plan:true,  loc:'room' },
+  { id:'u3', name:'이서연', bg:'#c9c0d8', deco:'heart',  dc:'#e8cbc5', rad:'14px 5px 14px 5px', plan:false, loc:'room' },
+  { id:'u4', name:'정민수', bg:'#c6d0ad', deco:'star',   dc:'#f4ecd6', rad:'999px', plan:true,  loc:null },
+  { id:'u5', name:'김민서', bg:'#bccbd6', deco:'checker',dc:'',        rad:'5px',   plan:true,  loc:null },
 ];
 const ME_STYLE = { id:'me', bg:'#efe6d3', deco:'sparkle', dc:'#d6b565', rad:'10px' };
 
@@ -576,10 +675,10 @@ function makeSticker(p, list, isMe){
   el.style.setProperty('--bg', p.bg);
   el.style.setProperty('--rot', rotFor(p.id, list));
   el.style.setProperty('--rad', p.rad);
-  const dec = p.deco === 'checker'
-    ? `<span class="dec chk checker" aria-hidden="true"></span>`
-    : `<span class="dec" aria-hidden="true">${icon(p.deco, p.dc, 20)}</span>`;
-  el.innerHTML = dec + `<span class="nm">${esc(isMe ? me.name : p.name)}</span>`;
+if (p.deco === 'checker') el.classList.add('tx-dots');
+  el.classList.add(hash(p.id+list) % 2 ? 'tr-a' : 'tr-b');
+  const tex = isMe ? 'tape-gold' : (p.deco === 'checker' ? 'tape-dots' : '');
+  el.innerHTML = (tex ? `<img class="tex" src="assets/cut/${tex}.png" alt="" aria-hidden="true">` : '') + (isMe ? `<img class="me-star" src="assets/cut/star-red.png" alt="" aria-hidden="true">` : '') + `<span class="nm">${esc(isMe ? me.name : p.name)}</span>`;
   if (isMe){
     el.insertAdjacentHTML('beforeend', `<span class="me-b" aria-label="me">ME</span>`);
     const x = document.createElement('button');
