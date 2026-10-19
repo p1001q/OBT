@@ -400,7 +400,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .stickers{gap:12px 8px;padding:2px 0 0}
 .sticker{background:none!important;box-shadow:none!important;border-radius:0!important;isolation:isolate;
   min-height:44px;padding:7px 18px 6px!important;gap:6px;
-  font-family:'OZ Marker',var(--f-marker);font-weight:400;font-size:23px;letter-spacing:-.01em;color:#272320;
+  font-family:'OZ Marker',var(--f-marker);font-weight:400;font-size:18px;letter-spacing:-.01em;color:#272320;
   filter:drop-shadow(0 2px 1.5px rgba(40,22,6,.26))}
 .sticker::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.93;
   background:
@@ -1029,7 +1029,7 @@ function syncButtons(){
     b.querySelector('.state-word').textContent = on ? '✓ Here now!' : 'Tap to mark';
   });
   const mn = $('#myName'); mn.textContent = me.name;
-  const L = [...me.name].length; mn.style.fontSize = (L<=3 ? 34 : L<=5 ? 27 : L<=8 ? 20 : 16) + 'px';
+  const L = [...me.name].length; mn.style.fontSize = (L<=3 ? 30 : L<=5 ? 24 : L<=8 ? 18 : 15) + 'px';
 }
 function update(animate, msg){
   syncButtons();
