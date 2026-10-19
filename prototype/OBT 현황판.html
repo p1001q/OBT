@@ -321,7 +321,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .cut{position:absolute;display:block;pointer-events:none;user-select:none;z-index:4;
   filter:drop-shadow(1.6px 0 0 #f6f1e6) drop-shadow(-1.6px 0 0 #f6f1e6) drop-shadow(0 1.6px 0 #f6f1e6) drop-shadow(0 -1.6px 0 #f6f1e6) drop-shadow(0 5px 4px rgba(40,22,6,.4)) saturate(.85) sepia(.1)}
 .cut.nob{filter:drop-shadow(0 6px 4px rgba(40,22,6,.42)) saturate(.88) sepia(.08)}
-.bead{display:inline-block;width:var(--bs,20px);height:var(--bs,20px);border-radius:50%;background:center/cover;flex:none;
+.bead{display:inline-block;width:var(--bs,20px);height:var(--bs,20px);border-radius:50%;background:#fff center/cover;flex:none;
   box-shadow:0 2px 2px rgba(40,22,6,.3)}
 .beads{display:inline-flex;align-items:center;gap:1px;position:relative}
 .beads::before{content:"";position:absolute;left:-14px;right:-14px;top:50%;height:1.5px;background:#7b5a3a;z-index:-1;border-radius:2px}
@@ -703,6 +703,13 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
     transform:rotate(-12deg);opacity:.32;mix-blend-mode:screen;filter:brightness(0) invert(1) sepia(.35) saturate(.6)}
   #devFrame{display:none!important}
 }
+/* ===== v12 ===== */
+/* desktop column = exact phone width so confetti & layout match mobile */
+@media (min-width:521px){ #app,body.framed #app{width:390px} }
+
+/* who's riding scrap taped onto the red margin line under the logo badge */
+.e-scrap{top:62px!important;bottom:auto!important;left:auto!important;right:22px!important;z-index:6;transform:rotate(5deg)!important;font-size:20px!important;padding:8px 12px 6px!important}
+.e-scrap .tape{left:50%!important;margin-left:-22px;top:-12px!important;transform:rotate(-4deg)!important}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
@@ -889,7 +896,7 @@ function icon(name, color, size){
   }
   return '';
 }
-document.querySelectorAll('.sbtn .pclip').forEach(c => { const b = c.cloneNode(); b.classList.add('pc-back'); c.classList.add('pc-front'); c.before(b); });
+
 document.querySelectorAll('[data-ic]').forEach(el => el.innerHTML = icon(el.dataset.ic, el.dataset.c, +el.dataset.s));
 
 /* ---------- ransom letters + beads ---------- */
@@ -906,7 +913,7 @@ document.querySelectorAll('[data-ransom]').forEach((el, wi) => {
   });
 });
 document.querySelectorAll('[data-beads]').forEach(el => {
-  el.innerHTML = [...el.dataset.beads].map(ch => `<span class="bead" style="background-image:url(assets/cut/b-${ch}.png)"></span>`).join('');
+  el.innerHTML = [...el.dataset.beads].map(ch => `<span class="bead" style="background-image:url(assets/cut/b2-${ch}.png)"></span>`).join('');
 });
 
 /* ---------- mock data ---------- */
