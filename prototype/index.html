@@ -84,15 +84,6 @@ body.bgfixed .cork{background-attachment:fixed}
   background:radial-gradient(circle, transparent 54%, rgba(118,70,26,.22) 57%, rgba(118,70,26,.08) 61%, transparent 64%),
              radial-gradient(circle at 40% 60%, rgba(118,70,26,.06), transparent 60%)}
 
-/* dev bar */
-.dev{position:fixed;top:10px;left:10px;right:10px;z-index:50;display:flex;flex-wrap:wrap;gap:6px;pointer-events:none;font-family:var(--f-body)}
-.dev button{pointer-events:auto;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid var(--ink);background:var(--paper);
-  font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 2px 0 rgba(47,41,36,.4)}
-.dev button:active{transform:translateY(2px);box-shadow:none}
-.dev button[disabled]{opacity:.45;cursor:default}
-.dev button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.dev .tag{align-self:center;font:600 11px var(--f-mono);letter-spacing:.08em;color:var(--paper);background:#8e3b30;padding:3px 7px;border-radius:3px}
-
 /* phone-frame preview (dev) */
 body.framed{background:#3b2a22;min-height:100vh;display:grid;place-items:center;padding:24px 0}
 body.framed #app{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;border-radius:44px;
@@ -148,6 +139,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 /* ---------- board ---------- */
 #board{max-width:1120px;margin:0 auto;padding:72px 16px 44px}
 #board[hidden],#entry[hidden]{display:none}
+.board-back{position:absolute;top:16px;left:16px;z-index:25;height:40px;padding:0 12px 0 9px;border:1.5px solid var(--ink);border-radius:999px;
+  background:var(--paper);color:var(--ink);font:700 13px var(--f-body);display:flex;align-items:center;gap:5px;cursor:pointer;
+  box-shadow:0 3px 0 rgba(59,42,34,.35);background-image:var(--fiber)}
+.board-back:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(59,42,34,.35)}
 .layout{display:grid;gap:24px}
 .head{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding-right:84px;min-height:92px}
 .dymo{position:relative;display:inline-block;margin:0;transform:rotate(-1.5deg);
@@ -712,7 +707,6 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
   .cork,body.framed .cork{min-height:calc(100vh - 24px);border-radius:2px}
   .desk-logo{display:block;position:fixed;right:-60px;bottom:-70px;width:min(40vw,560px);z-index:0;pointer-events:none;
     transform:rotate(-12deg);opacity:.32;mix-blend-mode:screen;filter:brightness(0) invert(1) sepia(.35) saturate(.6)}
-  #devFrame{display:none!important}
 }
 /* ===== v12 ===== */
 /* desktop column = exact phone width so confetti & layout match mobile */
@@ -731,10 +725,6 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 </style>
 </head>
 <body>
-<div class="dev" aria-label="Dev tools">
-  <button type="button" id="devBack" aria-label="Back to name entry"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
-  <span class="tag">DEV</span>
-</div>
 <img class="desk-logo" src="assets/oz-logo.png" alt="" aria-hidden="true">
 <div id="app"><div class="cork grain">
 <img class="poster deco" src="assets/cut/poster.png" alt="" aria-hidden="true">
@@ -765,6 +755,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 
 <!-- ============ BOARD ============ -->
 <main id="board" hidden aria-label="OBT board">
+  <button class="board-back" type="button" id="boardBack" aria-label="이름 입력 화면으로 돌아가기"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>이전</span></button>
   <div class="layout">
     <header class="head">
       <h1 class="title" aria-label="OBT — today's board"><span class="ransom" data-ransom="OBT" aria-hidden="true"></span><img class="t-star deco" src="assets/cut/star-holo.png" alt="" aria-hidden="true"></h1>
@@ -870,7 +861,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <img class="cut deco" src="assets/cut/tape-dots.png" alt="" aria-hidden="true" style="width:26px;left:20px;top:-14px;transform:rotate(-28deg)">
         <div class="nt-txt b-txt">
           <b>자율 연습은<br>오후 6–7시까지!</b>
-          <span>공용장비는<br>보드 밑에 숫자 있음.<br>숫자 없는 건<br>남의 개인보드!</span>
+          <span>공용장비는 보드 밑에 숫자 있음. 숫자 없는 건 남의 개인보드!</span>
         </div>
       </div>
       <img class="cut deco" src="assets/cut/star-gold.png" alt="" aria-hidden="true" style="width:34px;left:30px;bottom:60px;transform:rotate(10deg)">
@@ -1093,14 +1084,13 @@ function showBoard(animate){
   if (animate && !RM){ void board.offsetWidth; board.classList.add('arrive'); }
   update(false);
   window.scrollTo(0,0); $('#app').scrollTop = 0;
-  devBack.disabled = false;
 }
-const devBack = $('#devBack');
+const boardBack = $('#boardBack');
 function showEntry(){
-  board.hidden = true; entry.hidden = false; devBack.disabled = true;
+  board.hidden = true; entry.hidden = false;
   input.value = me.name; input.focus(); input.select();
 }
-devBack.addEventListener('click', showEntry);
+boardBack.addEventListener('click', showEntry);
 
 card.addEventListener('submit', e => {
   e.preventDefault();
@@ -1119,7 +1109,7 @@ card.addEventListener('submit', e => {
 });
 input.addEventListener('input', () => { if (input.value.trim()) err.textContent = ''; });
 
-if (me.name){ showBoard(false); } else { update(false); devBack.disabled = true; }
+if (me.name){ showBoard(false); } else { update(false); }
 })();
 </script>
 </body>
