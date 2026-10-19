@@ -11,7 +11,7 @@
 <style>
 @font-face{font-family:'OZ Marker';src:url('../font-proto/OZMarker-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
 :root{
-  --ink:#2f2924;
+  --ink:#3b2a22;
   --ink-soft:#6a5d51;
   --paper:#f7f2e8;
   --line:#c9bba6;
@@ -60,7 +60,7 @@ body.bgfixed .cork{background-attachment:fixed}
   background:radial-gradient(ellipse at 30% 60%, rgba(110,80,40,.18), transparent 60%), linear-gradient(rgba(255,255,255,.14), rgba(255,255,255,.02)), var(--tc,rgba(214,196,158,.8));
   clip-path:polygon(0 6%,3% 0,6% 8%,9% 0,100% 0,97% 15%,100% 30%,97% 48%,100% 64%,97% 82%,100% 100%,0 100%,3% 86%,0 70%,3% 52%,0 36%,3% 20%);
   box-shadow:0 1px 1px rgba(0,0,0,.06)}
-.checker{background:conic-gradient(#3b3530 25%, #efe8da 0 50%, #3b3530 0 75%, #efe8da 0) 0 0/10px 10px}
+.checker{background:conic-gradient(#3b2a22 25%, #efe8da 0 50%, #3b2a22 0 75%, #efe8da 0) 0 0/10px 10px}
 .paper-noise::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;mix-blend-mode:multiply;z-index:0;
   background:
     radial-gradient(ellipse 60% 40% at 100% 100%, var(--stain), transparent 70%),
@@ -94,9 +94,9 @@ body.bgfixed .cork{background-attachment:fixed}
 .dev .tag{align-self:center;font:600 11px var(--f-mono);letter-spacing:.08em;color:var(--paper);background:#8e3b30;padding:3px 7px;border-radius:3px}
 
 /* phone-frame preview (dev) */
-body.framed{background:#35302b;min-height:100vh;display:grid;place-items:center;padding:24px 0}
+body.framed{background:#3b2a22;min-height:100vh;display:grid;place-items:center;padding:24px 0}
 body.framed #app{width:390px;height:844px;overflow-y:auto;overflow-x:hidden;border-radius:44px;
-  outline:10px solid #15110e;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);scrollbar-width:none;padding:14px 12px}
+  outline:10px solid #3b2a22;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);scrollbar-width:none;padding:14px 12px}
 body.framed #app::-webkit-scrollbar{display:none}
 body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 @media (max-width:520px){ body.framed{display:block;padding:0} body.framed #app{width:auto;height:auto;outline:0;border-radius:0;overflow:visible;padding:12px} body.framed .cork{min-height:calc(100dvh - 24px);border-radius:2px} }
@@ -120,10 +120,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .field::placeholder{color:#b8ab99}
 .field:focus{box-shadow:0 0 0 3px rgba(214,181,101,.55)}
 .err{min-height:22px;margin:8px 2px 6px;font-size:13px;color:#9b3a2e}
-.go{width:100%;min-height:54px;border:0;border-radius:8px;background:#3a332d;color:#f5efe3;
-  font-family:var(--f-body);font-weight:600;font-size:17px;cursor:pointer;box-shadow:0 3px 0 #1d1915;transition:transform .15s, box-shadow .15s;
+.go{width:100%;min-height:54px;border:0;border-radius:8px;background:#3b2a22;color:#f5efe3;
+  font-family:var(--f-body);font-weight:600;font-size:17px;cursor:pointer;box-shadow:0 3px 0 #3b2a22;transition:transform .15s, box-shadow .15s;
   display:flex;align-items:center;justify-content:center;gap:8px}
-.go:active{transform:translateY(2px);box-shadow:0 1px 0 #1d1915}
+.go:active{transform:translateY(2px);box-shadow:0 1px 0 #3b2a22}
 .go:focus-visible,.sbtn:focus-visible,.x:focus-visible,.rename:focus-visible{outline:3px solid #4b6f91;outline-offset:3px}
 .card.shake{animation:shake .28s ease}
 @keyframes shake{25%{transform:rotate(-1deg) translateX(-6px)}75%{transform:rotate(-1deg) translateX(6px)}}
@@ -337,7 +337,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .mini.m1{width:38px;height:38px;left:-30px;top:2px;transform:rotate(-12deg);background:url('assets/cut/s-cherry.png') center/112% no-repeat #f2b7b6}
 .mini.m2{width:30px;height:30px;left:-14px;top:46px;transform:rotate(10deg);
   background:radial-gradient(circle, #f3ead6 22%, transparent 25%) 0 0/9px 9px, #c79a3c}
-.mini.m3{width:34px;height:34px;left:62px;top:60px;transform:rotate(16deg);background:url('assets/cut/s-solar.png') center/108% no-repeat #2a2a28}
+.mini.m3{width:34px;height:34px;left:62px;top:60px;transform:rotate(16deg);background:url('assets/cut/s-solar.png') center/108% no-repeat #3b2a22}
 
 /* titles */
 .title{margin:0;line-height:0;transform:rotate(-2deg)}
@@ -383,7 +383,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .title{position:relative;display:inline-block}
 .t-star{position:absolute;width:34px;right:-22px;top:-12px;transform:rotate(14deg);filter:drop-shadow(0 3px 2px rgba(40,22,6,.4))}
 .date-tag-x{
-  padding:10px 18px 9px!important;color:#3a2a1b!important}
+  padding:10px 18px 9px!important;color:#3b2a22!important}
 
 
 /* hardware sits on the paper edge */
@@ -413,7 +413,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
   clip-path:polygon(4px 0,calc(100% - 3px) 0,100% 12%,calc(100% - 5px) 26%,calc(100% - 1px) 40%,calc(100% - 6px) 55%,calc(100% - 2px) 70%,calc(100% - 5px) 86%,calc(100% - 1px) 100%,3px 100%,0 88%,5px 74%,1px 60%,6px 45%,0 30%,4px 14%)}
 .sticker.tx-dots .tex{object-fit:cover;transform:rotate(0)}
 .sticker.tx-dots::before,.sticker.me::before{opacity:0}
-.sticker.tx-dots{color:#1d1a17;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
+.sticker.tx-dots{color:#3b2a22;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
 .sticker.me{width:132px;height:44px;min-width:132px;min-height:44px}
 .sticker.tape-photo{width:92px;height:38px;min-width:92px;min-height:38px;padding:4px 2px 3px!important;justify-content:center}
 .sticker.tape-photo::before{opacity:0}
@@ -434,10 +434,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .nt-img{display:block;width:100%;height:auto;pointer-events:none;user-select:none;filter:drop-shadow(0 8px 6px rgba(40,22,6,.35))}
 .nt-bubble{width:min(100%,380px);transform:rotate(-2deg)}
 .nt-txt{position:absolute;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
-  font-family:var(--f-marker);color:#241f1b;word-break:keep-all;line-height:1.15}
+  font-family:var(--f-marker);color:#3b2a22;word-break:keep-all;line-height:1.15}
 .b-txt{left:3%;width:50%;top:22%;height:52%;gap:6px}
 .b-txt b{font-size:clamp(18px,5.6cqi,24px);font-weight:700;letter-spacing:-.02em}
-.b-txt span{font-size:clamp(14px,4cqi,16px);font-weight:700;line-height:1.2;color:#3b3329}
+.b-txt span{font-size:clamp(14px,4cqi,16px);font-weight:700;line-height:1.2;color:#3b2a22}
 .nt-sign{width:min(64%,250px);margin:-44px 0 0 auto;transform:rotate(3deg)}
 .s-txt{left:20%;top:13%;width:46%;height:42%;transform:rotate(-15deg);font-size:clamp(24px,7cqi,30px);font-weight:700;letter-spacing:-.02em;line-height:1.05}
 
@@ -461,7 +461,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .nametag{position:absolute;z-index:7;left:-14px;top:-40px;width:156px;transform:rotate(-9deg);filter:drop-shadow(0 4px 3px rgba(40,22,6,.4))}
 .nametag img{display:block;width:100%;height:auto}
 .nt-name{position:absolute;left:9%;right:9%;top:42%;bottom:9%;display:flex;align-items:center;justify-content:center;
-  font-family:'OZ Marker',var(--f-marker);font-weight:400;line-height:1;color:#1f1b18;white-space:nowrap;overflow:hidden;letter-spacing:-.01em;
+  font-family:'OZ Marker',var(--f-marker);font-weight:400;line-height:1;color:#3b2a22;white-space:nowrap;overflow:hidden;letter-spacing:-.01em;
   text-shadow:.4px .4px 0 rgba(31,27,24,.6);transform:rotate(-1deg)}
 /* paper slips for buttons */
 .btns{gap:16px}
@@ -887,7 +887,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 <script>
 (() => {
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const INK = '#2f2924';
+const INK = '#3b2a22';
 const $ = s => document.querySelector(s);
 
 /* ---------- icons (simple shapes) ---------- */
