@@ -414,11 +414,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .sticker.tx-dots .tex{object-fit:cover;transform:rotate(0)}
 .sticker.tx-dots::before,.sticker.me::before{opacity:0}
 .sticker.tx-dots{color:#1d1a17;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
-.sticker.me,.sticker.tape-photo{width:132px;height:44px;min-width:132px;min-height:44px}
-.sticker.tape-photo{justify-content:center}
+.sticker.me{width:132px;height:44px;min-width:132px;min-height:44px}
+.sticker.tape-photo{width:120px;height:50px;min-width:120px;min-height:50px;padding:10px 14px 9px!important;justify-content:center}
 .sticker.tape-photo::before{opacity:0}
 .sticker .tape-design{object-fit:fill;clip-path:none}
-.sticker.tape-deep-teal{color:#f8f1df;text-shadow:0 1px 1px rgba(22,45,43,.5)}
 
 .sticker.me{padding-right:4px!important}
 .me-star{position:absolute;width:24px;left:-10px;top:-12px;transform:rotate(-14deg);filter:drop-shadow(0 1px 1px rgba(40,22,6,.4))}
@@ -948,16 +947,16 @@ const OTHERS = [
 const ME_STYLE = { id:'me', bg:'#efe6d3', deco:'sparkle', dc:'#d6b565', rad:'10px' };
 
 const TAPE_DESIGNS = [
-  { id:'deep-teal',     src:'assets/tape/tape-deep-teal.png' },
-  { id:'peach',         src:'assets/tape/tape-peach.png' },
-  { id:'coral',         src:'assets/tape/tape-coral.png' },
   { id:'blush',         src:'assets/tape/tape-blush.png' },
   { id:'mint-stripe',   src:'assets/tape/tape-mint-stripe.png' },
   { id:'purple-dot',    src:'assets/tape/tape-purple-dot.png' },
-  { id:'pink-diagonal', src:'assets/tape/tape-pink-diagonal.png' },
   { id:'red-grid',      src:'assets/tape/tape-red-grid.png' },
+  { id:'orange-gingham',    src:'assets/tape/tape-orange-gingham.png' },
+  { id:'multicolor-plaid',  src:'assets/tape/tape-multicolor-plaid.png' },
+  { id:'blue-dot',          src:'assets/tape/tape-blue-dot.png' },
+  { id:'mint-horizontal',   src:'assets/tape/tape-mint-horizontal.png' },
 ];
-const TAPE_KEY = 'obt-tape-map-v2';
+const TAPE_KEY = 'obt-tape-map-v3';
 let tapeMap = {};
 try { tapeMap = JSON.parse(localStorage.getItem(TAPE_KEY)) || {}; } catch(e){}
 
