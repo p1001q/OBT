@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
+@font-face{font-family:'OZ Marker';src:url('../font-proto/OZMarker-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
 :root{
   --ink:#2f2924;
   --ink-soft:#6a5d51;
@@ -399,7 +400,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .stickers{gap:12px 8px;padding:2px 0 0}
 .sticker{background:none!important;box-shadow:none!important;border-radius:0!important;isolation:isolate;
   min-height:44px;padding:7px 18px 6px!important;gap:6px;
-  font-family:var(--f-marker);font-weight:700;font-size:23px;letter-spacing:-.01em;color:#272320;
+  font-family:'OZ Marker',var(--f-marker);font-weight:400;font-size:23px;letter-spacing:-.01em;color:#272320;
   filter:drop-shadow(0 2px 1.5px rgba(40,22,6,.26))}
 .sticker::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.93;
   background:
@@ -456,7 +457,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .nametag{position:absolute;z-index:7;left:-14px;top:-40px;width:156px;transform:rotate(-9deg);filter:drop-shadow(0 4px 3px rgba(40,22,6,.4))}
 .nametag img{display:block;width:100%;height:auto}
 .nt-name{position:absolute;left:9%;right:9%;top:42%;bottom:9%;display:flex;align-items:center;justify-content:center;
-  font-family:var(--f-marker);font-weight:700;line-height:1;color:#1f1b18;white-space:nowrap;overflow:hidden;letter-spacing:-.01em;
+  font-family:'OZ Marker',var(--f-marker);font-weight:400;line-height:1;color:#1f1b18;white-space:nowrap;overflow:hidden;letter-spacing:-.01em;
   text-shadow:.4px .4px 0 rgba(31,27,24,.6);transform:rotate(-1deg)}
 /* paper slips for buttons */
 .btns{gap:16px}
