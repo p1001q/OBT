@@ -102,7 +102,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 
 /* ---------- entry ---------- */
 #entry{min-height:inherit;display:grid;place-items:center;padding:80px 18px 60px;position:relative}
-.entry-wrap{position:relative;width:100%;max-width:340px}
+.entry-wrap{position:relative;width:100%;max-width:340px;
+  transition:transform .22s ease,filter .22s ease,opacity .2s ease}
 .card{position:relative;background:#fbf8f1;border-radius:2px;padding:36px 22px 22px;
   background-image:linear-gradient(transparent 63px, rgba(184,92,80,.35) 63px 64.5px, transparent 64.5px),
                    linear-gradient(rgba(110,140,170,.2) 1px, transparent 1px);
@@ -125,8 +126,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .go:focus-visible,.sbtn:focus-visible,.x:focus-visible,.rename:focus-visible{outline:3px solid #4b6f91;outline-offset:3px}
 .card.shake{animation:shake .28s ease}
 @keyframes shake{25%{transform:rotate(-1deg) translateX(-6px)}75%{transform:rotate(-1deg) translateX(6px)}}
-.card.lift{transform:rotate(-3deg) translateY(-12px) scale(1.03);box-shadow:0 30px 34px -14px rgba(40,22,6,.55)}
-.card.away{transform:rotate(-6deg) translateY(-36px) scale(.97);opacity:0}
+.entry-wrap.lift{transform:rotate(-2deg) translateY(-12px) scale(1.03);filter:drop-shadow(0 30px 17px rgba(40,22,6,.35))}
+.entry-wrap.away{transform:rotate(-5deg) translateY(-36px) scale(.97);opacity:0}
 
 /* postage stamp */
 .stamp{position:absolute;width:74px;height:90px;padding:5px;z-index:2;
@@ -1033,7 +1034,7 @@ bRoom.addEventListener('click', () => { me.loc = me.loc === 'room' ? null : 'roo
 bRide.addEventListener('click', () => { me.loc = me.loc === 'ride' ? null : 'ride'; update(true, me.loc ? 'Pinned to Out riding' : 'Removed from Out riding'); });
 
 /* ---------- entry flow ---------- */
-const entry = $('#entry'), board = $('#board'), card = $('#entryCard'), input = $('#nameIn'), err = $('#err');
+const entry = $('#entry'), board = $('#board'), wrap = $('.entry-wrap'), card = $('#entryCard'), input = $('#nameIn'), err = $('#err');
 function showBoard(animate){
   entry.hidden = true; board.hidden = false;
   board.classList.remove('arrive');
@@ -1060,9 +1061,9 @@ card.addEventListener('submit', e => {
   err.textContent = '';
   me.name = v; save();
   if (RM){ showBoard(false); return; }
-  card.classList.add('lift');
-  setTimeout(() => card.classList.add('away'), 180);
-  setTimeout(() => { card.classList.remove('lift','away'); showBoard(true); }, 380);
+  wrap.classList.add('lift');
+  setTimeout(() => wrap.classList.add('away'), 180);
+  setTimeout(() => { wrap.classList.remove('lift','away'); showBoard(true); }, 380);
 });
 input.addEventListener('input', () => { if (input.value.trim()) err.textContent = ''; });
 
