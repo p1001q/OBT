@@ -687,6 +687,22 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 @container app (min-width:760px){
   .notice .nt-sign{top:130px!important;left:auto!important;right:auto!important;left:440px!important}
 }
+/* ===== v11 ===== */
+.note-h .badge-sk{width:86px!important;height:86px!important;top:var(--bk-t,25px)!important}
+.badges .logo-st{top:-8px;bottom:8px}
+/* desktop: fixed mobile-width pinboard centred on green */
+.desk-logo{display:none}
+@media (min-width:521px){
+  body,body.framed{display:block;padding:0;min-height:100vh;
+    background:var(--noise) 0 0/180px, repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px), linear-gradient(#21452f,var(--oz));
+    background-blend-mode:soft-light,normal,normal;background-attachment:fixed}
+  #app,body.framed #app{width:414px;height:auto;min-height:100vh;margin:0 auto;overflow:visible;border-radius:0;outline:0;padding:12px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.35), 0 30px 60px -10px rgba(0,0,0,.55), 0 0 120px rgba(0,0,0,.35);position:relative;z-index:1}
+  .cork,body.framed .cork{min-height:calc(100vh - 24px);border-radius:2px}
+  .desk-logo{display:block;position:fixed;right:-60px;bottom:-70px;width:min(40vw,560px);z-index:0;pointer-events:none;
+    transform:rotate(-12deg);opacity:.32;mix-blend-mode:screen;filter:brightness(0) invert(1) sepia(.35) saturate(.6)}
+  #devFrame{display:none!important}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
@@ -695,10 +711,9 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 <body>
 <div class="dev" aria-label="Dev tools">
   <button type="button" id="devBack" aria-label="Back to name entry"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
-  <button type="button" id="devFrame" aria-pressed="false">390 preview</button>
-  <button type="button" id="devBg" aria-pressed="false">Fixed BG</button>
   <span class="tag">DEV</span>
 </div>
+<img class="desk-logo" src="assets/oz-logo.png" alt="" aria-hidden="true">
 <div id="app"><div class="cork grain">
 <img class="poster deco" src="assets/cut/poster.png" alt="" aria-hidden="true">
 <img class="sparkles deco" src="assets/cut/sparkles.png" alt="" aria-hidden="true">
@@ -1020,21 +1035,13 @@ function showBoard(animate){
   window.scrollTo(0,0); $('#app').scrollTop = 0;
   devBack.disabled = false;
 }
-const devBack = $('#devBack'), devFrame = $('#devFrame');
+const devBack = $('#devBack');
 function showEntry(){
   board.hidden = true; entry.hidden = false; devBack.disabled = true;
   input.value = me.name; input.focus(); input.select();
 }
 devBack.addEventListener('click', showEntry);
-const FKEY = 'obt-proto-frame';
-function setFrame(on){ document.body.classList.toggle('framed', on); devFrame.setAttribute('aria-pressed', on); localStorage.setItem(FKEY, on ? '1' : '0'); }
-const fs = localStorage.getItem(FKEY);
-setFrame(fs === null ? innerWidth > 700 : fs === '1');
-const devBg = $('#devBg'), BKEY = 'obt-proto-bgfixed';
-function setBg(on){ document.body.classList.toggle('bgfixed', on); devBg.setAttribute('aria-pressed', on); devBg.textContent = on ? 'Fixed BG ON' : 'Fixed BG OFF'; localStorage.setItem(BKEY, on ? '1' : '0'); }
-setBg(localStorage.getItem(BKEY) === '1');
-devBg.addEventListener('click', () => setBg(!document.body.classList.contains('bgfixed')));
-devFrame.addEventListener('click', () => setFrame(!document.body.classList.contains('framed')));
+
 card.addEventListener('submit', e => {
   e.preventDefault();
   const v = input.value.trim();
