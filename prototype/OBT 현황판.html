@@ -576,6 +576,47 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 /* sparkles bg decor */
 .sparkles{position:absolute;left:-34px;bottom:-26px;width:210px;z-index:0;pointer-events:none;transform:rotate(-8deg);
   filter:drop-shadow(0 5px 4px rgba(40,22,6,.3)) saturate(.85) sepia(.08)}
+/* ===== v7 ===== */
+.sbtn .pclip{width:24px!important;top:calc(50% - 27px)!important;left:-4px!important;right:auto!important;transform:rotate(-90deg)!important;z-index:5!important}
+.sbtn.ride .pclip{left:auto!important;right:-4px!important;transform:rotate(90deg)!important}
+.confetti{position:absolute;left:0;right:0;top:0;height:620px;z-index:0;pointer-events:none;
+  background:url('assets/cut/confetti.png') 0 -30px/380px auto repeat-x;opacity:.85;filter:saturate(.75) sepia(.1);
+  -webkit-mask:linear-gradient(#000 0 45%, transparent 100%);mask:linear-gradient(#000 0 45%, transparent 100%)}
+@container app (min-width:760px){ .confetti{height:760px;background-size:520px auto} }
+.head{min-height:0!important}
+.ctrl-wrap{margin-top:var(--ctrl-mt,-26px)!important}
+.nt-head{position:relative;display:flex;align-items:flex-end;margin:0 0 8px}
+.nt-head .mega-wrap{flex:none;margin:50px 0 0 -4px!important;z-index:1}
+.nt-head .nt-h{position:relative;z-index:3;margin:0 0 14px var(--nt-ov,-10px)}
+.notice .nt-sign{position:absolute!important;right:-6px;bottom:4px;top:auto!important;left:auto;width:140px;margin:0!important;z-index:5;transform:rotate(5deg)}
+.notice .s-txt{font-size:18px;left:20%;top:12%;width:46%;height:44%}
+.notice .nt-bubble{margin-top:0}
+@container app (min-width:760px){
+  .ctrl-wrap{margin-top:0!important}
+  .notice{display:block!important}
+  .notice .nt-sign{left:400px;right:auto;bottom:10px;width:170px}
+  .notice .s-txt{font-size:22px}
+}
+.patch{position:absolute;pointer-events:none;user-select:none;
+  filter:drop-shadow(0 1px 1px rgba(40,22,6,.35)) drop-shadow(0 5px 4px rgba(40,22,6,.3)) saturate(.9)}
+.patch-h{width:92px;right:6px;top:-18px;transform:rotate(14deg);z-index:8}
+.patch-s{width:50px;right:-10px;top:38px;transform:rotate(18deg);z-index:9}
+.rs-row{position:relative;height:0;margin:-26px 0;z-index:0}
+.rs-row .redstars{position:absolute;right:-30px;top:-120px;width:140px;transform:rotate(-8deg);
+  filter:drop-shadow(0 2px 1.5px rgba(40,22,6,.3)) saturate(.88)}
+@container app (min-width:760px){
+  .rs-row{position:absolute;height:auto;margin:0;left:calc(33.33% - 76px);top:30px;width:140px}
+  .rs-row .redstars{position:static;display:block;width:150px}
+}
+.note-h .sofa2{position:absolute;width:76px;right:44px;top:52px;z-index:6;transform:rotate(-6deg);
+  filter:drop-shadow(.8px 0 0 #f6f1e6) drop-shadow(-.8px 0 0 #f6f1e6) drop-shadow(0 .8px 0 #f6f1e6) drop-shadow(0 -.8px 0 #f6f1e6) drop-shadow(0 4px 3px rgba(40,22,6,.38)) saturate(.88) sepia(.08)}
+.note-h .badge-sk{position:absolute;width:44px;height:44px;border-radius:50%;z-index:4;right:var(--bk-r,12px);top:var(--bk-t,40px);transform:rotate(-10deg);
+  box-shadow:0 5px 5px -1px rgba(40,22,6,.5), 0 1px 1px rgba(40,22,6,.3)}
+.note-h .badge-sk img{display:block;width:100%;height:100%;border-radius:50%;filter:saturate(.85) contrast(.95) sepia(.08)}
+.note-h .badge-sk::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(ellipse 70% 55% at 34% 26%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%), radial-gradient(circle, transparent 74%, rgba(20,10,0,.28) 100%);
+  box-shadow:inset 1.5px 2px 2px rgba(255,255,255,.2), inset -2px -3px 4px rgba(20,10,0,.25)}
+.n-ride .note-h .st-img.peng{z-index:5}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
@@ -594,6 +635,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 <img class="wm deco" src="assets/oz-logo.png" alt="" aria-hidden="true">
 <img class="wm wm2 deco" src="assets/oz-logo.png" alt="" aria-hidden="true">
 <img class="wm wm-top deco" src="assets/oz-logo.png" alt="" aria-hidden="true">
+<div class="confetti deco" aria-hidden="true"></div>
 
 <!-- ============ ENTRY ============ -->
 <main id="entry" aria-labelledby="entry-title">
@@ -626,16 +668,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <span class="logo-st"></span>
         <span class="mini m1"></span><span class="mini m2"></span><span class="mini m3"></span>
       </div>
-      <div class="mega-wrap deco" aria-hidden="true"><img class="ahhh" src="assets/cut/ahhh.png" alt=""><img class="mega cut" src="assets/cut/p-mega.png" alt=""></div>
-      <div class="nt nt-sign" role="note" aria-label="Notice: 동방 깨끗이 사용!">
-        <img class="nt-img" src="assets/cut/sign.png" alt="" aria-hidden="true">
-        <div class="nt-txt s-txt">동방<br>깨끗이<br>사용!</div>
-      </div>
     </header>
 
     <div class="ctrl-wrap">
-    <img class="cut deco bulb" src="assets/cut/p-bulb.png" alt="" aria-hidden="true">
-    <img class="cut deco heartb" src="assets/cut/heartboard.png" alt="" aria-hidden="true">
+    <img class="patch patch-h deco" src="assets/cut/patch-heart.png" alt="" aria-hidden="true"><img class="patch patch-s deco" src="assets/cut/patch-star.png" alt="" aria-hidden="true">
     <section class="ctrl" aria-labelledby="ctrlTitle">
       <img class="paper deco" src="assets/cut/note-gray-pk.png" alt="" aria-hidden="true">
       <div class="nametag" aria-hidden="true"><img src="assets/cut/nametag.png" alt=""><span class="nt-name" id="myName"></span></div>
@@ -643,7 +679,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
       <div class="btns">
         <button class="sbtn plan" id="bPlan" type="button" aria-pressed="false">
           <img class="slip" src="assets/cut/card-s.png" alt="" aria-hidden="true"><span class="tint" aria-hidden="true"></span>
-          <img class="pclip back" src="assets/cut/paperclip.png" alt="" aria-hidden="true"><img class="pclip front" src="assets/cut/paperclip-front.png" alt="" aria-hidden="true">
+          <img class="pclip" src="assets/cut/paperclip.png" alt="" aria-hidden="true">
           <img class="cut nob ico i-star1" src="assets/cut/star-gold-t.png" alt=""><img class="cut nob ico i-star2" src="assets/cut/star-holo-t.png" alt="">
           <span class="lbl">Riding today</span>
           <span class="sw" aria-hidden="true"><span class="swt">OFF</span><span class="trk"></span></span>
@@ -652,14 +688,14 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <div class="locs" role="group" aria-labelledby="locLabel">
           <button class="sbtn room" id="bRoom" type="button" aria-pressed="false">
           <img class="slip" src="assets/cut/card-s.png" alt="" aria-hidden="true"><span class="tint" aria-hidden="true"></span>
-          <img class="pclip back" src="assets/cut/paperclip.png" alt="" aria-hidden="true"><img class="pclip front" src="assets/cut/paperclip-front.png" alt="" aria-hidden="true">
+          <img class="pclip" src="assets/cut/paperclip.png" alt="" aria-hidden="true">
             <img class="cut ico i-sofa" src="assets/cut/sofa.png" alt="">
             <span class="lbl">In the club room<span class="state-word">Tap to mark</span></span>
             <span class="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6" fill="none" stroke="#f6f2ea" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </button>
           <button class="sbtn ride" id="bRide" type="button" aria-pressed="false">
           <img class="slip" src="assets/cut/card-s.png" alt="" aria-hidden="true"><span class="tint" aria-hidden="true"></span>
-          <img class="pclip back" src="assets/cut/paperclip.png" alt="" aria-hidden="true"><img class="pclip front" src="assets/cut/paperclip-front.png" alt="" aria-hidden="true">
+          <img class="pclip" src="assets/cut/paperclip.png" alt="" aria-hidden="true">
             <img class="cut ico i-sign" src="assets/cut/skatesign.png" alt="">
             <span class="lbl">Out riding<span class="state-word">Tap to mark</span></span>
             <span class="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6" fill="none" stroke="#f6f2ea" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -688,6 +724,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
         <p class="empty" id="e-plan" hidden><span data-ic="star" data-c="#f4eee2" data-s="24" aria-hidden="true"></span>Nobody's planning to ride yet</p>
       </section>
 
+      <div class="rs-row deco" aria-hidden="true"><img class="redstars" src="assets/cut/redstars.png" alt=""></div>
       <section class="note paper-noise n-room" aria-labelledby="h-room">
         <img class="clip deco" src="assets/cut/cGreen2-h.png" alt="" aria-hidden="true" style="width:80px;top:-66px;left:22%;transform:rotate(-3deg)">
         <div class="note-h">
@@ -696,7 +733,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
           <span class="note-sub deco" aria-hidden="true">in the club room now</span>
           <span class="count"><b id="c-room">0</b> <span class="ppl">people</span></span></div>
           <svg class="postmark deco" viewBox="0 0 96 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="#173b27" stroke-width="1.6"/><circle cx="22" cy="22" r="13" fill="none" stroke="#173b27" stroke-width="1"/><text x="22" y="25" text-anchor="middle" font-size="8" font-weight="800" fill="#173b27" font-family="Pretendard Variable, sans-serif">OBT</text><path d="M44 12 q6 -4 12 0 t12 0 t12 0 t12 0 M44 22 q6 -4 12 0 t12 0 t12 0 t12 0 M44 32 q6 -4 12 0 t12 0 t12 0 t12 0" fill="none" stroke="#173b27" stroke-width="1.5"/></svg>
-          <img class="st-img deco goose" src="assets/cut/goose-stamp.png" alt="" aria-hidden="true">
+          <img class="st-img deco goose" src="assets/cut/goose-stamp.png" alt="" aria-hidden="true"><img class="sofa2 deco" src="assets/cut/sofa2.png" alt="" aria-hidden="true">
         </div>
         <div class="stickers" id="l-room" role="list"></div>
         <p class="empty" id="e-room" hidden><span data-ic="bubbles" data-c="#f4eee2" data-s="24" aria-hidden="true"></span>The club room is quiet for now</p>
@@ -712,7 +749,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
           <span class="note-sub deco" aria-hidden="true">out riding now</span>
           <span class="count"><b id="c-ride">0</b> <span class="ppl">people</span></span></div>
           <svg class="postmark deco" viewBox="0 0 96 44" aria-hidden="true"><circle cx="22" cy="22" r="18" fill="none" stroke="#173b27" stroke-width="1.6"/><circle cx="22" cy="22" r="13" fill="none" stroke="#173b27" stroke-width="1"/><text x="22" y="25" text-anchor="middle" font-size="8" font-weight="800" fill="#173b27" font-family="Pretendard Variable, sans-serif">OBT</text><path d="M44 12 q6 -4 12 0 t12 0 t12 0 t12 0 M44 22 q6 -4 12 0 t12 0 t12 0 t12 0 M44 32 q6 -4 12 0 t12 0 t12 0 t12 0" fill="none" stroke="#173b27" stroke-width="1.5"/></svg>
-          <img class="st-img deco" src="assets/cut/s-penguin.png" alt="" aria-hidden="true" style="width:44px;transform:rotate(6deg)">
+          <img class="st-img deco peng" src="assets/cut/s-penguin.png" alt="" aria-hidden="true" style="width:44px;transform:rotate(6deg)"><span class="badge-sk deco" aria-hidden="true"><img src="assets/cut/badge-skate.png" alt=""></span>
         </div>
         <div class="stickers" id="l-ride" role="list"></div>
         <p class="empty" id="e-ride" hidden><span data-ic="wheel" data-c="#f4eee2" data-s="24" aria-hidden="true"></span>Nobody's out riding yet</p>
@@ -720,7 +757,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
     </div>
 
     <section class="notice" aria-labelledby="h-notice">
-      <h2 id="h-notice" class="nt-h" aria-label="Notice"><span class="ransom" data-ransom="NOTICE" aria-hidden="true"></span></h2>
+      <div class="nt-head"><div class="mega-wrap deco" aria-hidden="true"><img class="ahhh" src="assets/cut/ahhh.png" alt=""><img class="mega cut" src="assets/cut/p-mega.png" alt=""></div><h2 id="h-notice" class="nt-h" aria-label="Notice"><span class="ransom" data-ransom="NOTICE" aria-hidden="true"></span></h2></div>
       <div class="nt nt-bubble">
         <img class="nt-img" src="assets/cut/bubble.png" alt="" aria-hidden="true">
         <img class="cut deco" src="assets/cut/tape-dots.png" alt="" aria-hidden="true" style="width:26px;left:20px;top:-14px;transform:rotate(-28deg)">
@@ -731,6 +768,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
       </div>
       <img class="cut deco" src="assets/cut/star-gold.png" alt="" aria-hidden="true" style="width:34px;left:30px;bottom:60px;transform:rotate(10deg)">
       <img class="cut deco" src="assets/cut/star-blue.png" alt="" aria-hidden="true" style="width:24px;left:74px;bottom:36px;transform:rotate(-14deg)">
+      <div class="nt nt-sign" role="note" aria-label="Notice: 동방 깨끗이 사용!">
+        <img class="nt-img" src="assets/cut/sign.png" alt="" aria-hidden="true">
+        <div class="nt-txt s-txt">동방<br>깨끗이<br>사용!</div>
+      </div>
     </section>
   </div>
 </main>
