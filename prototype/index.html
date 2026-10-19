@@ -115,7 +115,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
   font-family:var(--f-body);font-weight:600;font-size:17px;cursor:pointer;box-shadow:0 3px 0 #3b2a22;transition:transform .15s, box-shadow .15s;
   display:flex;align-items:center;justify-content:center;gap:8px}
 .go:active{transform:translateY(2px);box-shadow:0 1px 0 #3b2a22}
-.go:focus-visible,.sbtn:focus-visible,.x:focus-visible,.rename:focus-visible{outline:3px solid #4b6f91;outline-offset:3px}
+.go:focus-visible,.sbtn:focus-visible,.x:focus-visible,.rename:focus-visible,.board-back:focus-visible{outline:3px solid #4b6f91;outline-offset:3px}
 .card.shake{animation:shake .28s ease}
 @keyframes shake{25%{transform:rotate(-1deg) translateX(-6px)}75%{transform:rotate(-1deg) translateX(6px)}}
 .entry-wrap.lift{transform:rotate(-2deg) translateY(-12px) scale(1.03);filter:drop-shadow(0 30px 17px rgba(40,22,6,.35))}
@@ -139,10 +139,27 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 /* ---------- board ---------- */
 #board{max-width:1120px;margin:0 auto;padding:72px 16px 44px}
 #board[hidden],#entry[hidden]{display:none}
-.board-back{position:absolute;top:16px;left:16px;z-index:25;height:40px;padding:0 12px 0 9px;border:1.5px solid var(--ink);border-radius:999px;
-  background:var(--paper);color:var(--ink);font:700 13px var(--f-body);display:flex;align-items:center;gap:5px;cursor:pointer;
-  box-shadow:0 3px 0 rgba(59,42,34,.35);background-image:var(--fiber)}
-.board-back:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(59,42,34,.35)}
+.board-back{position:absolute;top:14px;left:14px;z-index:25;width:46px;height:46px;padding:0;border:0;background:none;
+  display:grid;place-items:center;cursor:pointer;border-radius:50%;filter:drop-shadow(0 3px 2px rgba(45,29,18,.34));
+  transition:filter .14s ease}
+.board-back img{display:block;width:46px;height:46px;object-fit:contain;pointer-events:none;transition:transform .14s ease}
+.board-back:hover img{transform:rotate(-3deg) scale(1.04)}
+.board-back:active img{transform:translateY(2px) scale(.96)}
+.board-back.pressed{filter:drop-shadow(0 1px 1px rgba(45,29,18,.3))}
+.board-back.pressed img{animation:patchPress .28s cubic-bezier(.2,.8,.35,1) both}
+#board.leaving{pointer-events:none;animation:boardLeave .3s cubic-bezier(.4,0,.3,1) .06s both}
+#entry.returning .entry-wrap{animation:entryReturn .38s cubic-bezier(.2,.9,.35,1) both}
+@keyframes patchPress{
+  0%{transform:translateY(0) scale(1)}
+  42%{transform:translateY(3px) rotate(-4deg) scale(.87)}
+  100%{transform:translateY(0) rotate(-2deg) scale(1.03)}}
+@keyframes boardLeave{
+  from{opacity:1;transform:translateX(0) scale(1)}
+  to{opacity:0;transform:translateX(22px) scale(.985)}}
+@keyframes entryReturn{
+  from{opacity:0;transform:translateX(-20px) rotate(-3deg) scale(.97)}
+  72%{opacity:1;transform:translateX(2px) rotate(.6deg) scale(1.01)}
+  to{opacity:1;transform:translateX(0) rotate(0) scale(1)}}
 .layout{display:grid;gap:24px}
 .head{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding-right:84px;min-height:92px}
 .dymo{position:relative;display:inline-block;margin:0;transform:rotate(-1.5deg);
@@ -752,7 +769,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 
 <!-- ============ BOARD ============ -->
 <main id="board" hidden aria-label="OBT board">
-  <button class="board-back" type="button" id="boardBack" aria-label="이름 입력 화면으로 돌아가기"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>이전</span></button>
+  <button class="board-back" type="button" id="boardBack" aria-label="이름 입력 화면으로 돌아가기"><img src="assets/cut/back-chevron-patch.png" alt="" aria-hidden="true"></button>
   <div class="layout">
     <header class="head">
       <h1 class="title" aria-label="OBT — today's board"><span class="ransom" data-ransom="OBT" aria-hidden="true"></span><img class="t-star deco" src="assets/cut/star-holo.png" alt="" aria-hidden="true"></h1>
@@ -1083,9 +1100,27 @@ function showBoard(animate){
   window.scrollTo(0,0); $('#app').scrollTop = 0;
 }
 const boardBack = $('#boardBack');
+let returningToEntry = false;
 function showEntry(){
-  board.hidden = true; entry.hidden = false;
-  input.value = me.name; input.focus(); input.select();
+  if (returningToEntry) return;
+  const reveal = animate => {
+    board.hidden = true;
+    board.classList.remove('leaving');
+    boardBack.classList.remove('pressed');
+    entry.hidden = false;
+    entry.classList.remove('returning');
+    if (animate){ void entry.offsetWidth; entry.classList.add('returning'); }
+    input.value = me.name;
+    input.focus({preventScroll:true}); input.select();
+    window.scrollTo(0,0); $('#app').scrollTop = 0;
+    returningToEntry = false;
+    if (animate) setTimeout(() => entry.classList.remove('returning'), 420);
+  };
+  if (RM){ reveal(false); return; }
+  returningToEntry = true;
+  boardBack.classList.add('pressed');
+  board.classList.add('leaving');
+  setTimeout(() => reveal(true), 370);
 }
 boardBack.addEventListener('click', showEntry);
 
