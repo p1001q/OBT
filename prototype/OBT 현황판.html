@@ -617,6 +617,36 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
   background:radial-gradient(ellipse 70% 55% at 34% 26%, rgba(255,255,255,.22), rgba(255,255,255,0) 70%), radial-gradient(circle, transparent 74%, rgba(20,10,0,.28) 100%);
   box-shadow:inset 1.5px 2px 2px rgba(255,255,255,.2), inset -2px -3px 4px rgba(20,10,0,.25)}
 .n-ride .note-h .st-img.peng{z-index:5}
+/* ===== v8 ===== */
+.ctrl-wrap{margin-top:var(--ctrl-mt,-11px)!important}
+.patch-h{top:30px!important}
+.patch-s{top:86px!important}
+.loc-label em{font:inherit;letter-spacing:inherit}
+/* bg red stars between blocks: bigger, above paper */
+.rs-row{z-index:0!important;margin:-26px 0!important}
+.rs-row .redstars{width:200px!important;right:30px!important;top:-110px!important;transform:rotate(-76deg)}
+.rs-row.rs-2{margin:-52px 0 0!important}
+.rs-row.rs-2 .redstars{right:auto!important;left:40px!important;top:-62px!important;transform:rotate(-100deg) scaleX(-1)}
+@container app (min-width:760px){ .rs-row.rs-2{display:none} }
+/* go skate neighbours */
+.n-plan .note-h .star-gs{width:34px;right:-22px;top:-6px;z-index:6;transform:rotate(-12deg)}
+.n-plan .note-h .dog{position:absolute;width:64px;right:66px;top:-10px;z-index:4;transform:rotate(-8deg);pointer-events:none;
+  filter:drop-shadow(0 4px 3px rgba(40,22,6,.38)) saturate(.9) sepia(.06)}
+.n-plan .note-h .st-img.goskate{z-index:5}
+/* sofa bigger */
+.note-h .sofa2{width:102px!important;right:34px!important;top:42px!important}
+/* riding badge 2x, above penguin, both nudged left */
+.note-h .badge-sk{width:88px!important;height:88px!important;right:var(--bk-r,26px)!important;top:var(--bk-t,40px)!important;z-index:7!important}
+.n-ride .note-h .st-img.peng{right:-4px!important}
+/* notice: NOTICE out of the megaphone, sign top-right, bubble tilted right */
+.nt-head{align-items:flex-start!important}
+.nt-head .nt-h{position:absolute!important;left:96px;top:var(--nt-top,88px);margin:0!important;transform:rotate(-8deg);transform-origin:left center;width:max-content}
+.nt-head .nt-h .ransom{flex-wrap:nowrap}
+.notice .nt-sign{top:var(--sign-top,150px)!important;bottom:auto!important;right:-8px!important}
+.notice .nt-bubble{transform:rotate(5deg);margin-top:-6px!important;margin-left:4px}
+@container app (min-width:760px){
+  .notice .nt-sign{top:130px!important;left:auto!important;right:auto!important;left:440px!important}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
@@ -709,10 +739,11 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
     </section></div>
 
     <div class="notes">
+      <div class="rs-row rs-2 deco" aria-hidden="true"><img class="redstars" src="assets/cut/redstars.png" alt=""></div>
       <section class="note paper-noise n-plan" aria-labelledby="h-plan">
         <img class="pinimg deco" src="assets/cut/p-pin.png" alt="" aria-hidden="true" style="top:-24px;left:50%;margin-left:-18px">
-        <img class="cut deco" src="assets/cut/star-red.png" alt="" aria-hidden="true" style="width:34px;left:-14px;bottom:26px;transform:rotate(-12deg)">
         <div class="note-h">
+          <img class="dog deco" src="assets/cut/dog.png" alt="" aria-hidden="true"><img class="cut deco star-gs" src="assets/cut/star-red.png" alt="" aria-hidden="true">
           <div class="nh-txt"><span class="pc-lbl deco" aria-hidden="true">POST CARD · 01</span>
           <h2 id="h-plan" aria-label="riding today"><span class="ransom" data-ransom="TODAY" aria-hidden="true"></span></h2>
           <span class="note-sub deco" aria-hidden="true">riding today</span>
