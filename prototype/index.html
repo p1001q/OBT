@@ -414,7 +414,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .sticker.tx-dots .tex{object-fit:cover;transform:rotate(0)}
 .sticker.tx-dots::before,.sticker.me::before{opacity:0}
 .sticker.tx-dots{color:#1d1a17;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
-.sticker.tape-photo{min-width:128px;justify-content:center}
+.sticker.me,.sticker.tape-photo{width:132px;height:44px;min-width:132px;min-height:44px}
+.sticker.tape-photo{justify-content:center}
 .sticker.tape-photo::before{opacity:0}
 .sticker .tape-design{object-fit:fill;clip-path:none}
 .sticker.tape-deep-teal{color:#f8f1df;text-shadow:0 1px 1px rgba(22,45,43,.5)}
@@ -933,9 +934,16 @@ document.querySelectorAll('[data-beads]').forEach(el => {
 const OTHERS = [
   { id:'u1', name:'김민서', plan:true,  loc:'room' },
   { id:'u2', name:'박지훈', plan:true,  loc:'room' },
-  { id:'u3', name:'이서연', plan:false, loc:'room' },
-  { id:'u4', name:'정민수', plan:true,  loc:null },
-  { id:'u5', name:'김민서', plan:true,  loc:null },
+  { id:'u3', name:'이서연', plan:true,  loc:'room' },
+  { id:'u4', name:'정민수', plan:true,  loc:'ride' },
+  { id:'u5', name:'최유진', plan:true,  loc:null },
+  { id:'u6', name:'한지우', plan:true,  loc:'ride' },
+  { id:'u7', name:'오세훈', plan:true,  loc:'room' },
+  { id:'u8', name:'윤하늘', plan:true,  loc:null },
+  { id:'u9', name:'임도현', plan:true,  loc:'ride' },
+  { id:'u10', name:'송예린', plan:true, loc:'room' },
+  { id:'u11', name:'강서준', plan:false, loc:'ride' },
+  { id:'u12', name:'배수아', plan:false, loc:'room' },
 ];
 const ME_STYLE = { id:'me', bg:'#efe6d3', deco:'sparkle', dc:'#d6b565', rad:'10px' };
 
@@ -949,14 +957,17 @@ const TAPE_DESIGNS = [
   { id:'pink-diagonal', src:'assets/tape/tape-pink-diagonal.png' },
   { id:'red-grid',      src:'assets/tape/tape-red-grid.png' },
 ];
-const TAPE_KEY = 'obt-tape-map-v1';
+const TAPE_KEY = 'obt-tape-map-v2';
 let tapeMap = {};
 try { tapeMap = JSON.parse(localStorage.getItem(TAPE_KEY)) || {}; } catch(e){}
 
 function tapeFor(personId){
   const saved = TAPE_DESIGNS.find(tape => tape.id === tapeMap[personId]);
   if (saved) return saved;
-  const tape = TAPE_DESIGNS[Math.floor(Math.random() * TAPE_DESIGNS.length)];
+  const used = new Set(Object.values(tapeMap));
+  const available = TAPE_DESIGNS.filter(tape => !used.has(tape.id));
+  const pool = available.length ? available : TAPE_DESIGNS;
+  const tape = pool[Math.floor(Math.random() * pool.length)];
   tapeMap[personId] = tape.id;
   localStorage.setItem(TAPE_KEY, JSON.stringify(tapeMap));
   return tape;
