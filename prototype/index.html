@@ -415,7 +415,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .sticker.tx-dots::before,.sticker.me::before{opacity:0}
 .sticker.tx-dots{color:#1d1a17;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
 .sticker.me{width:132px;height:44px;min-width:132px;min-height:44px}
-.sticker.tape-photo{width:120px;height:50px;min-width:120px;min-height:50px;padding:10px 7px 9px!important;justify-content:center}
+.sticker.tape-photo{width:112px;height:46px;min-width:112px;min-height:46px;padding:8px 5px 7px!important;justify-content:center}
 .sticker.tape-photo::before{opacity:0}
 .sticker .tape-design{object-fit:fill;clip-path:none}
 
@@ -948,15 +948,17 @@ const ME_STYLE = { id:'me', bg:'#efe6d3', deco:'sparkle', dc:'#d6b565', rad:'10p
 
 const TAPE_DESIGNS = [
   { id:'mint-stripe',   src:'assets/tape/tape-mint-stripe.png' },
-  { id:'purple-dot',    src:'assets/tape/tape-purple-dot.png' },
   { id:'red-grid',      src:'assets/tape/tape-red-grid.png' },
-  { id:'mint-horizontal',   src:'assets/tape/tape-mint-horizontal.png' },
   { id:'gray-grid',         src:'assets/tape/tape-gray-grid.png' },
   { id:'ivory-check',       src:'assets/tape/tape-ivory-check.png' },
   { id:'yellow-blue-stripe',src:'assets/tape/tape-yellow-blue-stripe.png' },
   { id:'pastel-vertical',   src:'assets/tape/tape-pastel-vertical.png' },
+  { id:'blue-hand-lines',   src:'assets/tape/tape-blue-hand-lines.png' },
+  { id:'navy-small-dot',    src:'assets/tape/tape-navy-small-dot.png' },
+  { id:'watercolor-confetti',src:'assets/tape/tape-watercolor-confetti.png' },
+  { id:'pale-yellow-gingham',src:'assets/tape/tape-pale-yellow-gingham.png' },
 ];
-const TAPE_KEY = 'obt-tape-map-v4';
+const TAPE_KEY = 'obt-tape-map-v5';
 let tapeMap = {};
 try { tapeMap = JSON.parse(localStorage.getItem(TAPE_KEY)) || {}; } catch(e){}
 
