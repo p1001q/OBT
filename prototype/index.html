@@ -414,6 +414,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .sticker.tx-dots .tex{object-fit:cover;transform:rotate(0)}
 .sticker.tx-dots::before,.sticker.me::before{opacity:0}
 .sticker.tx-dots{color:#1d1a17;text-shadow:0 0 3px #f5f0e4, 0 0 2px #f5f0e4}
+.sticker.tape-photo{min-width:128px;justify-content:center}
+.sticker.tape-photo::before{opacity:0}
+.sticker .tape-design{object-fit:fill;clip-path:none}
+.sticker.tape-deep-teal{color:#f8f1df;text-shadow:0 1px 1px rgba(22,45,43,.5)}
 
 .sticker.me{padding-right:4px!important}
 .me-star{position:absolute;width:24px;left:-10px;top:-12px;transform:rotate(-14deg);filter:drop-shadow(0 1px 1px rgba(40,22,6,.4))}
@@ -927,13 +931,36 @@ document.querySelectorAll('[data-beads]').forEach(el => {
 
 /* ---------- mock data ---------- */
 const OTHERS = [
-  { id:'u1', name:'김민서', bg:'#e2bcb3', deco:'flower', dc:'#f2e6cc', rad:'999px', plan:true,  loc:'room' },
-  { id:'u2', name:'박지훈', bg:'#d8c49a', deco:'bolt',   dc:'#f0dca6', rad:'8px',   plan:true,  loc:'room' },
-  { id:'u3', name:'이서연', bg:'#c9c0d8', deco:'heart',  dc:'#e8cbc5', rad:'14px 5px 14px 5px', plan:false, loc:'room' },
-  { id:'u4', name:'정민수', bg:'#c6d0ad', deco:'star',   dc:'#f4ecd6', rad:'999px', plan:true,  loc:null },
-  { id:'u5', name:'김민서', bg:'#bccbd6', deco:'checker',dc:'',        rad:'5px',   plan:true,  loc:null },
+  { id:'u1', name:'김민서', plan:true,  loc:'room' },
+  { id:'u2', name:'박지훈', plan:true,  loc:'room' },
+  { id:'u3', name:'이서연', plan:false, loc:'room' },
+  { id:'u4', name:'정민수', plan:true,  loc:null },
+  { id:'u5', name:'김민서', plan:true,  loc:null },
 ];
 const ME_STYLE = { id:'me', bg:'#efe6d3', deco:'sparkle', dc:'#d6b565', rad:'10px' };
+
+const TAPE_DESIGNS = [
+  { id:'deep-teal',     src:'assets/tape/tape-deep-teal.png' },
+  { id:'peach',         src:'assets/tape/tape-peach.png' },
+  { id:'coral',         src:'assets/tape/tape-coral.png' },
+  { id:'blush',         src:'assets/tape/tape-blush.png' },
+  { id:'mint-stripe',   src:'assets/tape/tape-mint-stripe.png' },
+  { id:'purple-dot',    src:'assets/tape/tape-purple-dot.png' },
+  { id:'pink-diagonal', src:'assets/tape/tape-pink-diagonal.png' },
+  { id:'red-grid',      src:'assets/tape/tape-red-grid.png' },
+];
+const TAPE_KEY = 'obt-tape-map-v1';
+let tapeMap = {};
+try { tapeMap = JSON.parse(localStorage.getItem(TAPE_KEY)) || {}; } catch(e){}
+
+function tapeFor(personId){
+  const saved = TAPE_DESIGNS.find(tape => tape.id === tapeMap[personId]);
+  if (saved) return saved;
+  const tape = TAPE_DESIGNS[Math.floor(Math.random() * TAPE_DESIGNS.length)];
+  tapeMap[personId] = tape.id;
+  localStorage.setItem(TAPE_KEY, JSON.stringify(tapeMap));
+  return tape;
+}
 
 const KEY = 'obt-proto-v1';
 let me = { name:'', plan:false, loc:null };
@@ -954,13 +981,17 @@ function makeSticker(p, list, isMe){
   el.className = 'sticker' + (isMe ? ' me' : '');
   el.setAttribute('role','listitem');
   el.dataset.key = p.id;
-  el.style.setProperty('--bg', p.bg);
   el.style.setProperty('--rot', rotFor(p.id, list));
-  el.style.setProperty('--rad', p.rad);
-if (p.deco === 'checker') el.classList.add('tx-dots');
   el.classList.add(hash(p.id+list) % 2 ? 'tr-a' : 'tr-b');
-  const tex = isMe ? 'tape-gold' : (p.deco === 'checker' ? 'tape-dots' : '');
-  el.innerHTML = (tex ? `<img class="tex" src="assets/cut/${tex}.png" alt="" aria-hidden="true">` : '') + (isMe ? `<img class="me-star" src="assets/cut/star-red.png" alt="" aria-hidden="true">` : '') + `<span class="nm">${esc(isMe ? me.name : p.name)}</span>`;
+  if (isMe){
+    el.style.setProperty('--bg', p.bg);
+    el.style.setProperty('--rad', p.rad);
+    el.innerHTML = `<img class="tex" src="assets/cut/tape-gold.png" alt="" aria-hidden="true"><img class="me-star" src="assets/cut/star-red.png" alt="" aria-hidden="true"><span class="nm">${esc(me.name)}</span>`;
+  } else {
+    const tape = tapeFor(p.id);
+    el.classList.add('tape-photo', `tape-${tape.id}`);
+    el.innerHTML = `<img class="tex tape-design" src="${tape.src}" alt="" aria-hidden="true"><span class="nm">${esc(p.name)}</span>`;
+  }
   if (isMe){
     const x = document.createElement('button');
     x.className = 'x'; x.type = 'button';
