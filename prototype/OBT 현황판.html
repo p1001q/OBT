@@ -644,6 +644,31 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .nt-head .nt-h .ransom{flex-wrap:nowrap}
 .notice .nt-sign{top:var(--sign-top,150px)!important;bottom:auto!important;right:-8px!important}
 .notice .nt-bubble{transform:rotate(5deg);margin-top:-6px!important;margin-left:4px}
+/* ===== v9 ===== */
+.e-logo{top:-42px!important}
+.card h1.e-h1{margin-bottom:18px!important}
+.badges{top:-18px!important}
+@container app (min-width:760px){ .badges{top:-26px!important} }
+/* ctrl: star overlaps heart, content up under nametag corner */
+.patch-s{top:68px!important}
+.ctrl{padding-top:102px!important}
+/* paperclips: outer loop sits on slip edge */
+.sbtn .pclip{left:11px!important}
+.sbtn.ride .pclip{left:auto!important;right:11px!important}
+.sbtn.plan .pclip{z-index:3!important}
+.sbtn.plan .ico.i-star1,.sbtn.plan .ico.i-star2{z-index:6!important}
+/* red stars between ctrl & card 01: out of grid flow (restores gap) */
+.rs-row.rs-2{position:absolute!important;left:0;right:0;top:0;height:0;margin:0!important}
+.rs-row.rs-2 .redstars{top:-114px!important}
+/* card 01 red star: no white edge */
+.n-plan .note-h .star-gs{filter:drop-shadow(0 3px 2px rgba(40,22,6,.4)) saturate(.88)!important}
+/* dog bigger, nudged right */
+.n-plan .note-h .dog{width:84px!important;right:50px!important;top:-24px!important}
+/* riding badge smaller, clear of dashed line */
+.note-h .badge-sk{width:64px!important;height:64px!important;top:var(--bk-t,36px)!important}
+/* notice up */
+.nt-head .nt-h{top:var(--nt-top,60px)!important}
+.notice .nt-sign{top:var(--sign-top,120px)!important}
 @container app (min-width:760px){
   .notice .nt-sign{top:130px!important;left:auto!important;right:auto!important;left:440px!important}
 }
@@ -671,19 +696,18 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 <main id="entry" aria-labelledby="entry-title">
   <div class="entry-wrap">
     <span class="logo-st e-logo deco" aria-hidden="true"></span>
-    <img class="cut deco" src="assets/cut/s-ladybug.png" alt="" aria-hidden="true" style="width:56px;left:-18px;top:-30px;transform:rotate(-18deg)">
+    <img class="cut deco" src="assets/cut/s-ladybug.png" alt="" aria-hidden="true" style="width:56px;left:-18px;top:-30px;transform:rotate(45deg)">
     <form class="card paper-noise" id="entryCard" novalidate>
       <span class="pin clear deco" aria-hidden="true"></span>
       <p class="kicker">OBT · Who's riding today</p>
       <h1 id="entry-title" class="e-h1"><span class="ransom deco" data-ransom="HEY" style="--rh:40px" aria-hidden="true"></span><img class="ex deco" src="assets/cut/p-ex.png" alt="" aria-hidden="true"><span class="h1t">Write your name on a&nbsp;new sticker</span></h1>
-      <p class="sub">It goes straight on the board. No login needed.</p>
       <label class="sr" for="nameIn">Name</label>
       <input class="field" id="nameIn" name="name" type="text" autocomplete="nickname" maxlength="12" placeholder="e.g. 김민서">
       <p class="err" id="err" role="alert"></p>
       <button class="go" type="submit">Pin it to the board</button>
     </form>
     <div class="e-scrap deco" aria-hidden="true"><span class="tape"></span>who's riding?</div>
-    <img class="cut deco" src="assets/cut/s-sardine.png" alt="" aria-hidden="true" style="width:78px;right:-8px;bottom:-56px;transform:rotate(12deg)">
+    <img class="cut deco" src="assets/cut/s-sardine.png" alt="" aria-hidden="true" style="width:78px;right:-8px;bottom:-48px;transform:rotate(12deg)">
   </div>
 </main>
 
