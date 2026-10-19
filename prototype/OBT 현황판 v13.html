@@ -674,8 +674,8 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .mini.m2{top:64px!important}
 @container app (min-width:760px){ .mini.m2{top:78px!important} }
 /* clip loop straddles the paper edge */
-.sbtn .pclip{left:1px!important}
-.sbtn.ride .pclip{left:auto!important;right:1px!important}
+.sbtn .pclip{left:6px!important}
+.sbtn.ride .pclip{left:auto!important;right:6px!important}
 .note-h .st-img.goskate{width:108px!important}
 .note-h .badge-sk{width:92px!important;height:92px!important;top:var(--bk-t,22px)!important}
 .notice .nt-sign{top:var(--sign-top,98px)!important}
@@ -711,6 +711,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 /* who's riding scrap taped onto the red margin line under the logo badge */
 .e-scrap{top:62px!important;bottom:auto!important;left:auto!important;right:22px!important;z-index:6;transform:rotate(5deg)!important;font-size:20px!important;padding:8px 12px 6px!important}
 .e-scrap .tape{left:50%!important;margin-left:-22px;top:-12px!important;transform:rotate(-4deg)!important}
+
+/* keep the location slips' left edge clean in both toggle states */
+.locs .sbtn > .slip{clip-path:inset(0 0 0 2.5%)}
+.locs .sbtn > .tint{left:2.5%}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
