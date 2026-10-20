@@ -1,0 +1,9 @@
+-- 관리자 비밀번호 설정 예시.
+-- 1. 이 파일을 복사해 seed-admin.sql 로 만든다(seed-admin.sql 은 git에 올리지 않는다).
+-- 2. '여기에_비밀번호' 를 실제 비밀번호로 바꾼 뒤 SQL Editor에서 한 번 실행한다.
+-- 3. 비밀번호는 bcrypt 해시로만 저장된다. 변경할 때도 같은 쿼리를 다시 실행하면 된다.
+
+insert into public.app_settings (key, value)
+values ('admin_password_hash', extensions.crypt('여기에 비밀번호', extensions.gen_salt('bf')))
+on conflict (key) do update set value = excluded.value;
+`

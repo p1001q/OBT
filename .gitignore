@@ -6,3 +6,6 @@ dist/
 !.env.example
 *.local
 *.tsbuildinfo
+
+# 관리자 비밀번호가 들어간 로컬 SQL
+supabase/seed-admin.sql
