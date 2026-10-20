@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
-import { RansomText } from './visuals'
+import { RansomText } from '../../shared/ui/RansomText'
 
 export function EntryScreen({
   initialName,

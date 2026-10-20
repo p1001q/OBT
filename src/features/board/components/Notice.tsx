@@ -1,4 +1,4 @@
-import { RansomText } from './visuals'
+import { RansomText } from '../../../shared/ui/RansomText'
 
 export function Notice() {
   return (

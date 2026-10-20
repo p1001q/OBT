@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import type { BoardMember } from '../domain/member'
-import type { DailyEntry } from '../storage/dailyEntryStorage'
-import { BoardHeader } from './BoardHeader'
-import { Notice } from './Notice'
-import { StatusControls } from './StatusControls'
-import { StatusNote } from './StatusNote'
+import type { BoardMember } from '../../domain/member'
+import type { DailyEntry } from '../../storage/dailyEntryStorage'
+import { BoardHeader } from './components/BoardHeader'
+import { Notice } from './components/Notice'
+import { StatusControls } from './components/StatusControls'
+import { StatusNote } from './components/StatusNote'
 
 export function BoardScreen({
   entry,

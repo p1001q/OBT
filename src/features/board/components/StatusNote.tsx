@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import type { BoardMember } from '../domain/member'
-import { Icon, RansomText } from './visuals'
+import type { BoardMember } from '../../../domain/member'
+import { Icon } from '../../../shared/ui/Icon'
+import { RansomText } from '../../../shared/ui/RansomText'
 import { NameSticker } from './NameSticker'
 
 const NOTE_DETAILS = {

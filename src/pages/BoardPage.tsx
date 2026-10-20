@@ -1,14 +1,8 @@
-import { AdminPlaceholder } from './admin/AdminPlaceholder'
-import { BoardScreen } from './components/BoardScreen'
-import { EntryScreen } from './components/EntryScreen'
-import { useBoardApp } from './hooks/useBoardApp'
+import { BoardScreen } from '../features/board/BoardScreen'
+import { EntryScreen } from '../features/entry/EntryScreen'
+import { useBoardApp } from '../hooks/useBoardApp'
 
-export default function App() {
-  if (window.location.pathname.startsWith('/admin')) return <AdminPlaceholder />
-  return <TodayBoardApp />
-}
-
-function TodayBoardApp() {
+export function BoardPage() {
   const app = useBoardApp()
 
   return (

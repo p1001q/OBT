@@ -1,5 +1,5 @@
-import { formatBoardDate } from '../domain/kstDate'
-import { RansomText } from './visuals'
+import { formatBoardDate } from '../../../domain/kstDate'
+import { RansomText } from '../../../shared/ui/RansomText'
 
 export function BoardHeader() {
   return (

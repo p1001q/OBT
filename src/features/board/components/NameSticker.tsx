@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
-import type { BoardMember } from '../domain/member'
-import { Icon, type CssVars } from './visuals'
+import { useMemo, type CSSProperties } from 'react'
+import type { BoardMember } from '../../../domain/member'
+import { Icon } from '../../../shared/ui/Icon'
 
 const TAPE_DESIGNS = [
   'mint-stripe',
@@ -38,7 +38,7 @@ export function NameSticker({
   onRemove?: () => void
 }) {
   const tape = useMemo(() => TAPE_DESIGNS[hash(member.id) % TAPE_DESIGNS.length], [member.id])
-  const style = { '--rot': rotationFor(member.id, list), '--bg': '#efe6d3', '--rad': '10px' } as CssVars
+  const style = { '--rot': rotationFor(member.id, list), '--bg': '#efe6d3', '--rad': '10px' } as CSSProperties
   const removeLabel = list === 'plan'
     ? 'Remove my name from Riding today'
     : list === 'room'

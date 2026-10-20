@@ -1,4 +1,4 @@
-export function AdminPlaceholder() {
+export function AdminPage() {
   return (
     <main className="admin-placeholder">
       <section className="admin-paper">

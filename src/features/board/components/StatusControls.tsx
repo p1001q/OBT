@@ -1,5 +1,5 @@
-import type { DailyEntry } from '../storage/dailyEntryStorage'
-import { Beads } from './visuals'
+import type { DailyEntry } from '../../../storage/dailyEntryStorage'
+import { Beads } from '../../../shared/ui/Beads'
 
 export function StatusControls({
   entry,
