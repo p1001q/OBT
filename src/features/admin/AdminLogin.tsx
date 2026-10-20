@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react'
+import { fadeLinkClick } from '../../shared/navigation'
 
 export function AdminLogin({
   busy,
@@ -26,7 +27,7 @@ export function AdminLogin({
         <p className="admin-error" role="alert">{error}</p>
         <button className="admin-btn primary" type="submit" disabled={busy}>{busy ? '확인 중…' : '들어가기'}</button>
       </form>
-      <a className="admin-link" href="/">현황판으로 돌아가기</a>
+      <a className="admin-link" href="/" onClick={(event) => fadeLinkClick(event, '/')}>현황판으로 돌아가기</a>
     </section>
   )
 }

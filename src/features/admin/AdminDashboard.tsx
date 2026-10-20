@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
+import { fadeLinkClick } from '../../shared/navigation'
 import type { AdminMember, AdminOverview, NewRosterEntry } from '../../data/adminRepository'
 import { filterRoster, sortMembers, sortRoster } from '../../domain/rosterView'
 import { AddNamesForm } from './AddNamesForm'
 import { CollapsibleSection } from './CollapsibleSection'
+import { ConfirmDialog } from './ConfirmDialog'
 
 const RESET_PHRASE = '전체 초기화'
 
@@ -39,6 +41,7 @@ export function AdminDashboard({
 }) {
   const [phrase, setPhrase] = useState('')
   const [query, setQuery] = useState('')
+  const [confirmingReset, setConfirmingReset] = useState(false)
   const counts = new Map(overview.summary.map((item) => [item.name, item]))
   const sortedMembers = useMemo(() => sortMembers(overview.members, overview.roster), [overview.members, overview.roster])
   const sortedRoster = useMemo(() => sortRoster(overview.roster), [overview.roster])
@@ -83,7 +86,7 @@ export function AdminDashboard({
         <div className="admin-actions">
           <button className="admin-btn" type="button" onClick={onReload} disabled={busy}>새로고침</button>
           <button className="admin-btn" type="button" onClick={onLogout}>로그아웃</button>
-          <a className="admin-link" href="/">현황판</a>
+          <a className="admin-link" href="/" onClick={(event) => fadeLinkClick(event, '/')}>현황판</a>
         </div>
       </section>
 
@@ -140,7 +143,14 @@ export function AdminDashboard({
         <p className="admin-hint">명단 {overview.roster.length}자리, 오늘 입장자 {overview.members.length}명과 모든 상태가 삭제돼요. 되돌릴 수 없어요. 계속하려면 <b>{RESET_PHRASE}</b>를 입력하세요.</p>
         <label className="sr" htmlFor="resetPhrase">확인 문구</label>
         <input id="resetPhrase" type="text" value={phrase} autoComplete="off" onChange={(event) => setPhrase(event.target.value)} />
-        <button className="admin-btn danger" type="button" disabled={busy || phrase !== RESET_PHRASE} onClick={() => { onReset(); setPhrase('') }}>명단과 입장자 전부 삭제</button>
+        <button className="admin-btn danger" type="button" disabled={busy || phrase !== RESET_PHRASE} onClick={() => setConfirmingReset(true)}>명단과 입장자 전부 삭제</button>
+        <ConfirmDialog
+          open={confirmingReset}
+          title="전체 초기화"
+          message={`명단 ${overview.roster.length}자리와 오늘 입장자 ${overview.members.length}명, 모든 상태가 삭제돼요. 되돌릴 수 없어요. 정말 삭제할까요?`}
+          onCancel={() => setConfirmingReset(false)}
+          onConfirm={() => { setConfirmingReset(false); setPhrase(''); onReset() }}
+        />
       </section>
     </>
   )

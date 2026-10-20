@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
 import type { EntryCheck } from '../../hooks/useBoardApp'
+import { navigateWithFade } from '../../shared/navigation'
 import { RansomText } from '../../shared/ui/RansomText'
 
 export function EntryScreen({
@@ -21,14 +22,6 @@ export function EntryScreen({
   const inputRef = useRef<HTMLInputElement>(null)
   const lastLadybugClick = useRef(0)
 
-  // 관리자 화면에서 뒤로 돌아왔을 때 페이드 아웃 상태가 남지 않게 한다.
-  useEffect(() => {
-    const reset = () => document.body.classList.remove('to-admin')
-    reset()
-    window.addEventListener('pageshow', reset)
-    return () => window.removeEventListener('pageshow', reset)
-  }, [])
-
   // 무당벌레를 두 번 연달아 누르면 관리자 화면으로 이동한다. 한 번만 누르면 아무 반응이 없다.
   function openAdmin() {
     const now = Date.now()
@@ -37,13 +30,7 @@ export function EntryScreen({
       return
     }
     lastLadybugClick.current = 0
-    const go = () => window.location.assign('/admin')
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      go()
-      return
-    }
-    document.body.classList.add('to-admin')
-    window.setTimeout(go, 240)
+    navigateWithFade('/admin')
   }
 
   useEffect(() => {
@@ -59,7 +46,7 @@ export function EntryScreen({
     event.preventDefault()
     if (checking || submitting) return
     if (!name.trim()) {
-      setError('Write at least one letter')
+      setError('이름을 한 글자 이상 입력해 주세요.')
       inputRef.current?.focus()
       return
     }
