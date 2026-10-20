@@ -5,6 +5,7 @@ import {
   type BoardSnapshot,
   type RepositoryErrorCode,
 } from '../data/boardRepository'
+import { ERROR_MESSAGES } from '../data/errorMessages'
 import { SupabaseBoardRepository } from '../data/supabaseBoardRepository'
 import { getKstDay } from '../domain/kstDate'
 import {
@@ -26,16 +27,6 @@ const repository: BoardRepository = new SupabaseBoardRepository()
 
 const POLL_INTERVAL_MS = 10_000
 const RENAME_CONFIRM = '현재 상태를 모두 지우고 이름을 바꿀까요?'
-
-const ERROR_MESSAGES: Record<RepositoryErrorCode, string> = {
-  NAME_NOT_FOUND: '명단에 없는 이름이에요. 회장에게 문의해 주세요.',
-  NAME_SLOTS_FULL: '같은 이름의 자리가 모두 찼어요. 회장에게 문의해 주세요.',
-  MEMBER_NOT_FOUND: '입장 정보를 찾지 못했어요. 다시 시도해 주세요.',
-  MEMBER_EXPIRED: '날짜가 바뀌었어요. 이름을 다시 입력해 주세요.',
-  INVALID_STATUS: '저장하지 못했어요. 다시 시도해 주세요.',
-  INVALID_REQUEST: '요청을 처리하지 못했어요. 다시 시도해 주세요.',
-  UNKNOWN: '연결에 문제가 생겼어요. 잠시 후 다시 시도해 주세요.',
-}
 
 export type EntryCheck = { ok: true } | { ok: false; message: string }
 

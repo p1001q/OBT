@@ -19,6 +19,32 @@ export function EntryScreen({
   const [checking, setChecking] = useState(false)
   const [returningActive, setReturningActive] = useState(returning)
   const inputRef = useRef<HTMLInputElement>(null)
+  const lastLadybugClick = useRef(0)
+
+  // 관리자 화면에서 뒤로 돌아왔을 때 페이드 아웃 상태가 남지 않게 한다.
+  useEffect(() => {
+    const reset = () => document.body.classList.remove('to-admin')
+    reset()
+    window.addEventListener('pageshow', reset)
+    return () => window.removeEventListener('pageshow', reset)
+  }, [])
+
+  // 무당벌레를 두 번 연달아 누르면 관리자 화면으로 이동한다. 한 번만 누르면 아무 반응이 없다.
+  function openAdmin() {
+    const now = Date.now()
+    if (now - lastLadybugClick.current > 450) {
+      lastLadybugClick.current = now
+      return
+    }
+    lastLadybugClick.current = 0
+    const go = () => window.location.assign('/admin')
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      go()
+      return
+    }
+    document.body.classList.add('to-admin')
+    window.setTimeout(go, 240)
+  }
 
   useEffect(() => {
     setName(initialName)
@@ -59,7 +85,7 @@ export function EntryScreen({
     <main id="entry" className={returningActive ? 'returning' : ''} aria-labelledby="entry-title">
       <div className={`entry-wrap ${submitting ? 'submitting' : ''}`}>
         <span className="logo-st e-logo deco" aria-hidden="true" />
-        <img className="cut deco" src="/assets/cut/s-ladybug.png" alt="" aria-hidden="true" style={{ width: 56, left: -18, top: -30, transform: 'rotate(45deg)' }} />
+        <img className="cut ladybug-door" src="/assets/cut/s-ladybug.png" alt="" aria-hidden="true" draggable={false} onClick={openAdmin} style={{ width: 56, left: -18, top: -30, transform: 'rotate(45deg)' }} />
         <form className={`card paper-noise ${error ? 'shake' : ''}`} noValidate onSubmit={submit}>
           <span className="pin clear deco" aria-hidden="true" />
           <p className="kicker">OBT · Who's riding today</p>

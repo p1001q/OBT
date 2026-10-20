@@ -8,6 +8,7 @@ const ERROR_CODES: readonly RepositoryErrorCode[] = [
   'MEMBER_EXPIRED',
   'INVALID_STATUS',
   'INVALID_REQUEST',
+  'ADMIN_UNAUTHORIZED',
 ]
 
 export function parseRepositoryError(message: string): RepositoryErrorCode {
@@ -20,7 +21,7 @@ export function toServerLocation(location: Location): 'in_room' | 'riding' | nul
   return null
 }
 
-function fromServerLocation(value: unknown): Location {
+export function fromServerLocation(value: unknown): Location {
   if (value === 'in_room') return 'room'
   if (value === 'riding') return 'ride'
   return null

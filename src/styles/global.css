@@ -734,6 +734,5 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 
 .board-message{grid-column:1/-1;position:relative;z-index:4;margin:0;padding:18px;background:#f3ecdd;box-shadow:0 8px 10px -7px rgba(40,22,6,.45);font:700 14px var(--f-mono)}
 .board-error button{min-height:44px;margin-left:8px;border:1.5px solid var(--ink);border-radius:6px;background:#fffdf8;cursor:pointer}
-.admin-placeholder{min-height:100vh;display:grid;place-items:center;padding:24px;background:#b48c60;background-image:var(--noise),var(--mottle)}
-.admin-paper{width:min(100%,520px);padding:40px;background:#fbf8f1;background-image:var(--fiber);box-shadow:0 16px 24px -12px rgba(40,22,6,.6);transform:rotate(-.5deg)}
-.admin-paper h1{margin:0 0 12px;font-size:28px}.admin-paper p{line-height:1.6}.admin-paper a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:700;text-underline-offset:4px}
+.cut.ladybug-door{pointer-events:auto;cursor:default;-webkit-user-drag:none;touch-action:manipulation}
+body.to-admin #root{opacity:0;transition:opacity .22s ease}

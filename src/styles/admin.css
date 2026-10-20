@@ -1,0 +1,82 @@
+.admin{max-width:640px;margin:0 auto;padding:16px;
+  background:var(--paper);min-height:100dvh;font-size:15px;line-height:1.5}
+.admin-view{display:grid;gap:14px}
+.admin-card{background:#fffdf8;border:1.5px solid var(--ink);border-radius:8px;padding:16px;box-shadow:0 3px 0 var(--ink);margin:0}
+.admin h1{margin:0 0 4px;font-size:24px;letter-spacing:-.02em}
+.admin h2{margin:0 0 10px;font-size:18px;display:flex;align-items:baseline;gap:8px}
+.admin h2 span{font-size:13px;font-weight:600;color:var(--ink-soft)}
+.admin .kicker{margin:0 0 4px;font:700 12px var(--f-mono);letter-spacing:.08em;color:var(--oz)}
+.admin-head{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-start;border-top:8px solid var(--oz)}
+.admin-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.admin-hint{margin:0 0 10px;color:var(--ink-soft);font-size:13px}
+.admin-hint code{background:#efe6d3;padding:1px 5px;border-radius:4px}
+.admin label{display:block;margin-bottom:6px;font-weight:700}
+.admin input[type=password],.admin input[type=text],.admin input[type=search],.admin textarea{width:100%;font:inherit;padding:10px 12px;border:1.5px solid var(--ink);border-radius:6px;background:#fff;color:var(--ink)}
+.admin textarea{resize:vertical;min-height:120px;margin-bottom:8px}
+.admin-btn{min-height:44px;padding:0 16px;border:1.5px solid var(--ink);border-radius:6px;background:#fffdf8;cursor:pointer;font-weight:700}
+.admin-btn:disabled{opacity:.45;cursor:not-allowed}
+.admin-btn.primary{background:var(--oz);color:#f6f2ea;border-color:var(--oz)}
+.admin-btn.danger{border-color:#9b2c2c;color:#9b2c2c}
+.admin-link{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-weight:700}
+.admin-login form{display:grid;gap:8px;margin:12px 0}
+.admin-messages{display:grid;gap:8px}
+.admin-messages:empty{display:none}
+.admin-notice{margin:0;padding:10px 14px;background:#e4efdd;border:1.5px solid var(--oz);border-radius:6px}
+.admin-error{margin:0;min-height:1.2em;color:#9b2c2c;font-weight:700}
+.admin-messages .admin-error{padding:10px 14px;background:#f8e3e0;border:1.5px solid #9b2c2c;border-radius:6px}
+.admin-plan{margin:0 0 10px;padding-left:18px;font-size:13px}
+.admin-plan .warn{color:#8a5a00}
+.admin-plan .bad{color:#9b2c2c;font-weight:700}
+.admin-list{list-style:none;margin:0;padding:0;display:grid}
+.admin-list li{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name btn" "status btn";gap:0 12px;align-items:center;padding:10px 0;border-top:1px dashed var(--line)}
+.admin-list li:first-child{border-top:0}
+.admin-name{grid-area:name;font-weight:700;overflow-wrap:anywhere}
+.admin-status{grid-area:status;font-size:13px;color:var(--ink-soft)}
+.admin-list .admin-btn{grid-area:btn}
+.admin-empty{margin:0;color:var(--ink-soft)}
+.admin-danger{border-color:#9b2c2c;box-shadow:0 3px 0 #9b2c2c}
+.admin-danger input{margin-bottom:8px}
+.admin-name small{font-weight:400;color:var(--ink-soft);font-size:12px}
+.admin-section-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;transition:margin-bottom .25s ease}
+.admin-section-head.closed{margin-bottom:0}
+.admin-section-head h2{margin:0}
+.admin-toggle{display:inline-grid;place-items:center;width:44px;height:44px;margin:-6px 0 -6px -10px;border:0;background:none;color:var(--ink);cursor:pointer}
+.admin-toggle svg{transition:transform .15s}
+.admin-toggle svg.down{transform:rotate(180deg)}
+.admin-section-actions{flex:1 1 0;min-width:0;max-width:260px;margin-left:auto;overflow:hidden;
+  transition:opacity .2s ease,max-width .25s ease,visibility 0s}
+.admin-section-head.closed .admin-section-actions{opacity:0;max-width:0;visibility:hidden;transition:opacity .15s ease,max-width .25s ease,visibility 0s .25s}
+.admin-search{display:block;width:100%;font:inherit;padding:8px 12px;border:1.5px solid var(--ink);border-radius:6px;background:#fff;color:var(--ink)}
+.admin-error-box{margin:0 0 10px;padding:10px 14px;background:#f8e3e0;border:1.5px solid #9b2c2c;border-radius:6px;color:#7a1f1f;font-size:13px}
+.admin-error-box p{margin:0 0 6px;font-weight:700}
+.admin-error-box ul{margin:0;padding-left:18px}
+.admin-plan ul{margin:2px 0 0;padding-left:18px}
+
+/* ---------- 인터랙션 ---------- */
+.admin-collapse{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .28s ease,opacity .2s ease}
+.admin-collapse.open{grid-template-rows:1fr;opacity:1}
+.admin-collapse-inner{min-height:0;overflow:hidden}
+.admin-view>*{animation:admin-in .32s ease backwards}
+.admin-view>:nth-child(2){animation-delay:.04s}
+.admin-view>:nth-child(3){animation-delay:.08s}
+.admin-view>:nth-child(4){animation-delay:.12s}
+.admin-view>:nth-child(5){animation-delay:.16s}
+.admin-view>:nth-child(n+6){animation-delay:.2s}
+.admin-messages>p{animation:admin-in .25s ease backwards}
+.admin-list li{animation:admin-item-in .22s ease backwards;transition:background .15s ease,opacity .18s ease,transform .18s ease}
+.admin-list li:hover{background:rgba(214,181,101,.14)}
+.admin-list li.leaving{opacity:0;transform:translateX(14px);pointer-events:none}
+.admin-btn{transition:background .15s ease,transform .08s ease,opacity .15s ease}
+.admin-btn:hover:not(:disabled){background:#f3ead6}
+.admin-btn.primary:hover:not(:disabled){background:#24503a}
+.admin-btn.danger:hover:not(:disabled){background:#f8e3e0}
+.admin-btn:active:not(:disabled){transform:translateY(1px)}
+.admin-toggle:hover{background:rgba(214,181,101,.2);border-radius:6px}
+.admin input:focus-visible,.admin textarea:focus-visible,.admin button:focus-visible,.admin a:focus-visible{outline:2px solid var(--mustard);outline-offset:2px}
+.admin input,.admin textarea{transition:border-color .15s ease,box-shadow .15s ease}
+.admin input:focus,.admin textarea:focus{box-shadow:0 0 0 3px rgba(214,181,101,.35)}
+@keyframes admin-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes admin-item-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .admin *,.admin *::before,.admin *::after{animation:none!important;transition:none!important}
+}

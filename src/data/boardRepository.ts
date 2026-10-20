@@ -25,6 +25,7 @@ export type RepositoryErrorCode =
   | 'MEMBER_EXPIRED'
   | 'INVALID_STATUS'
   | 'INVALID_REQUEST'
+  | 'ADMIN_UNAUTHORIZED'
   | 'UNKNOWN'
 
 export class RepositoryError extends Error {

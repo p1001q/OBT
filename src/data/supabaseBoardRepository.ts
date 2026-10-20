@@ -1,5 +1,5 @@
 import type { Location, MemberStatus } from '../domain/member'
-import { parseBoard, parseRepositoryError, parseStatus, toServerLocation } from './boardMapper'
+import { parseBoard, parseStatus, toServerLocation } from './boardMapper'
 import {
   RepositoryError,
   type BoardRepository,
@@ -7,13 +7,7 @@ import {
   type NameCheck,
   type Registration,
 } from './boardRepository'
-import { supabase } from './supabaseClient'
-
-async function call(fn: string, args: Record<string, unknown>): Promise<unknown> {
-  const { data, error } = await supabase.rpc(fn, args)
-  if (error) throw new RepositoryError(parseRepositoryError(error.message), error.message)
-  return data
-}
+import { callRpc as call } from './rpc'
 
 export class SupabaseBoardRepository implements BoardRepository {
   async checkName(name: string): Promise<NameCheck> {
