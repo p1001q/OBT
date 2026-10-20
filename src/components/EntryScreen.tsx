@@ -12,7 +12,7 @@ export function EntryScreen({
 }) {
   const [name, setName] = useState(initialName)
   const [error, setError] = useState('')
-  const [leaving, setLeaving] = useState(false)
+  const [transition, setTransition] = useState<'idle' | 'lift' | 'away'>('idle')
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -32,13 +32,14 @@ export function EntryScreen({
       onSubmit(name)
       return
     }
-    setLeaving(true)
+    setTransition('lift')
+    window.setTimeout(() => setTransition('away'), 180)
     window.setTimeout(() => onSubmit(name), 380)
   }
 
   return (
     <main id="entry" className={returning ? 'returning' : ''} aria-labelledby="entry-title">
-      <div className={`entry-wrap ${leaving ? 'lift away' : ''}`}>
+      <div className={`entry-wrap ${transition === 'lift' ? 'lift' : transition === 'away' ? 'lift away' : ''}`}>
         <span className="logo-st e-logo deco" aria-hidden="true" />
         <img className="cut deco" src="/assets/cut/s-ladybug.png" alt="" aria-hidden="true" style={{ width: 56, left: -18, top: -30, transform: 'rotate(45deg)' }} />
         <form className={`card paper-noise ${error ? 'shake' : ''}`} noValidate onSubmit={submit}>

@@ -28,11 +28,13 @@ export function NameSticker({
   member,
   list,
   isMe = false,
+  removing = false,
   onRemove,
 }: {
   member: Pick<BoardMember, 'id' | 'name'>
   list: 'plan' | 'room' | 'ride'
   isMe?: boolean
+  removing?: boolean
   onRemove?: () => void
 }) {
   const tape = useMemo(() => TAPE_DESIGNS[hash(member.id) % TAPE_DESIGNS.length], [member.id])
@@ -44,11 +46,11 @@ export function NameSticker({
       : 'Remove my name from Out riding'
 
   return (
-    <div className={`sticker ${isMe ? 'me in' : `tape-photo tape-${tape}`} ${hash(member.id + list) % 2 ? 'tr-a' : 'tr-b'}`} role="listitem" style={style}>
+    <div className={`sticker ${isMe ? `me ${removing ? 'out' : 'in'}` : `tape-photo tape-${tape}`} ${hash(member.id + list) % 2 ? 'tr-a' : 'tr-b'}`} role="listitem" style={style}>
       <img className={`tex ${isMe ? '' : 'tape-design'}`} src={isMe ? '/assets/cut/tape-gold.png' : `/assets/tape/tape-${tape}.png`} alt="" aria-hidden="true" />
       {isMe && <img className="me-star" src="/assets/cut/star-red.png" alt="" aria-hidden="true" />}
       <span className="nm">{member.name}</span>
-      {isMe && (
+      {isMe && !removing && (
         <button className="x" type="button" aria-label={removeLabel} onClick={onRemove}>
           <span><Icon name="x" size={14} /></span>
         </button>

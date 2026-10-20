@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { BoardMember } from '../domain/member'
 import type { DailyEntry } from '../storage/dailyEntryStorage'
 import { BoardHeader } from './BoardHeader'
@@ -28,14 +29,25 @@ export function BoardScreen({
   onToggleRide: () => void
   onClearList: (list: 'plan' | 'room' | 'ride') => void
 }) {
+  const [leaving, setLeaving] = useState(false)
   const planned = members.filter((member) => member.planned)
   const room = members.filter((member) => member.location === 'room')
   const riding = members.filter((member) => member.location === 'ride')
   const me: BoardMember = { id: 'me', name: entry.name, planned: entry.planned, location: entry.location }
 
+  function goBack() {
+    if (leaving) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      onBack()
+      return
+    }
+    setLeaving(true)
+    window.setTimeout(onBack, 370)
+  }
+
   return (
-    <main id="board" className="arrive" aria-label="OBT board">
-      <button className="board-back" type="button" aria-label="이름 입력 화면으로 돌아가기" onClick={onBack}><img src="/assets/cut/back-chevron-patch.png" alt="" aria-hidden="true" /></button>
+    <main id="board" className={leaving ? 'leaving' : 'arrive'} aria-label="OBT board">
+      <button className={`board-back ${leaving ? 'pressed' : ''}`} type="button" aria-label="이름 입력 화면으로 돌아가기" onClick={goBack}><img src="/assets/cut/back-chevron-patch.png" alt="" aria-hidden="true" /></button>
       <div className="layout">
         <BoardHeader />
         <StatusControls entry={entry} onTogglePlanned={onTogglePlanned} onToggleRoom={onToggleRoom} onToggleRide={onToggleRide} />

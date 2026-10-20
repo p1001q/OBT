@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import type { BoardMember } from '../domain/member'
 import { Icon, RansomText } from './visuals'
 import { NameSticker } from './NameSticker'
@@ -30,7 +30,29 @@ export function StatusNote({
   onRemoveMe: () => void
 }) {
   const detail = NOTE_DETAILS[kind]
-  const allMembers = me ? [me, ...members] : members
+  const previousMe = useRef<BoardMember | null>(me)
+  const [exitingMe, setExitingMe] = useState<BoardMember | null>(null)
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  useEffect(() => {
+    if (me) {
+      previousMe.current = me
+      setExitingMe(null)
+      return
+    }
+
+    const departing = previousMe.current
+    previousMe.current = null
+    if (!departing || reducedMotion) return
+
+    setExitingMe(departing)
+    const timer = window.setTimeout(() => setExitingMe(null), 200)
+    return () => window.clearTimeout(timer)
+  }, [me, reducedMotion])
+
+  const displayedMe = me ?? exitingMe ?? (reducedMotion ? null : previousMe.current)
+  const allMembers = displayedMe ? [displayedMe, ...members] : members
+  const count = members.length + (me ? 1 : 0)
 
   return (
     <section className={`note paper-noise ${detail.className}`} aria-labelledby={`h-${kind}`}>
@@ -42,7 +64,7 @@ export function StatusNote({
         <div className="nh-txt"><span className="pc-lbl deco" aria-hidden="true">POST CARD · 0{kind === 'plan' ? 1 : kind === 'room' ? 2 : 3}</span>
           <h2 id={`h-${kind}`} aria-label={detail.label}><RansomText text={detail.title} wordIndex={detail.index} /></h2>
           <span className="note-sub deco" aria-hidden="true">{detail.subtitle}</span>
-          <span className="count"><b>{allMembers.length}</b> <span className="ppl">people</span></span>
+          <span className="count"><b>{count}</b> <span className="ppl">people</span></span>
         </div>
         <Postmark />
         {kind === 'plan' && <img className="st-img deco goskate" src="/assets/cut/goskate.png" alt="" aria-hidden="true" />}
@@ -50,9 +72,9 @@ export function StatusNote({
         {kind === 'ride' && <><img className="st-img deco peng" src="/assets/cut/s-penguin.png" alt="" aria-hidden="true" style={{ width: 44, transform: 'rotate(6deg)' }} /><span className="badge-sk deco" aria-hidden="true"><img src="/assets/cut/badge-skate.png" alt="" /></span></>}
       </div>
       <div className="stickers" role="list">
-        {allMembers.map((member) => <NameSticker key={member.id} member={member} list={kind} isMe={member.id === 'me'} onRemove={member.id === 'me' ? onRemoveMe : undefined} />)}
+        {allMembers.map((member) => <NameSticker key={member.id} member={member} list={kind} isMe={member.id === 'me'} removing={member.id === 'me' && !me} onRemove={member.id === 'me' ? onRemoveMe : undefined} />)}
       </div>
-      {allMembers.length === 0 && <p className="empty"><Icon name={detail.icon} color="#f4eee2" size={24} />{detail.empty}</p>}
+      {count === 0 && !displayedMe && <p className="empty fade"><Icon name={detail.icon} color="#f4eee2" size={24} />{detail.empty}</p>}
     </section>
   )
 }
