@@ -110,7 +110,32 @@ npm run build
 
 1. Supabase 프로젝트를 만들고 SQL Editor에서 `supabase/schema.sql`, `supabase/functions.sql` 순서로 실행함. 두 파일 모두 여러 번 실행해도 안전함
 2. `supabase/seed-admin.sql.example`을 `supabase/seed-admin.sql`로 복사해 비밀번호를 채우고 실행함. 이 파일은 git에 올리지 않음
-,
+
+## 배포
+
+Vercel에 GitHub 저장소를 연결해 배포함. 빌드 설정은 Vite 프리셋이 자동으로 잡으며(`npm run build`, 출력 `dist`), `vercel.json`은 `/admin` 직접 접속과 새로고침이 404가 되지 않도록 모든 경로를 `index.html`로 보내는 rewrite만 담음
+
+1. [vercel.com](https://vercel.com)에서 GitHub 계정으로 로그인함
+2. **Add New → Project**에서 `p1001q/OBT` 저장소를 **Import**함
+3. **Framework Preset**이 `Vite`, **Build Command**가 `npm run build`, **Output Directory**가 `dist`인지 확인함
+4. **Environment Variables**에 아래 두 값을 추가함. Secret key는 넣지 않음
+
+   | 변수 | 값 |
+   |---|---|
+   | `VITE_SUPABASE_URL` | 프로젝트 URL (`https://xxxx.supabase.co`) |
+   | `VITE_SUPABASE_PUBLISHABLE_KEY` | Publishable key (`sb_publishable_...`) |
+
+5. **Deploy**를 누름. 이후 `develop`을 포함한 브랜치 푸시마다 미리보기 배포가 생기고, Production Branch로 지정한 브랜치에 푸시하면 운영 배포가 갱신됨
+6. 환경변수는 빌드 시점에 코드에 삽입되므로 값을 바꾸면 **Deployments**에서 **Redeploy**해야 반영됨
+
+배포 후 확인 항목
+
+- `/`에서 이름 입력 후 입장하고 현황판이 표시됨
+- `/admin`을 주소창으로 직접 열거나 새로고침해도 404 없이 로그인 화면이 나옴
+- 관리자 로그인 후 명단 조회와 추가가 동작함
+- 브라우저 개발자 도구 Network 탭에서 Supabase 요청이 성공하고, 요청 헤더나 번들에 Secret key가 없음
+- 이미지와 폰트가 정상 로딩됨
+
 ## 라이선스
 
 라이선스는 추후 결정함
