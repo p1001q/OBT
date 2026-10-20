@@ -46,9 +46,26 @@
 
 - [제품 기획](./docs/기획.md)
 
+## 로컬 실행
+
+```bash
+npm install
+npm run dev
+```
+
+타입 검사, 핵심 상태 규칙 테스트, 프로덕션 빌드는 각각 다음 명령으로 확인합니다.
+
+```bash
+npm run typecheck
+npm test
+npm run build
+```
+
+현재 프론트엔드는 프로토타입의 가짜 팀원 데이터와 브라우저 `localStorage`를 사용합니다. `/admin`은 다음 Supabase 단계에서 실제 기능을 연결할 수 있도록 경로만 예약되어 있습니다.
+
 ## 현재 상태
 
-기획 확정 및 모바일 UI 시안 준비 단계입니다.
+Vite + React + TypeScript 프론트엔드 1단계가 구성되어 있습니다. Supabase, RPC, 관리자 기능은 아직 연결하지 않았습니다.
 
 ## 라이선스
 
