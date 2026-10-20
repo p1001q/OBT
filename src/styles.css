@@ -109,6 +109,12 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 @keyframes shake{25%{transform:rotate(-1deg) translateX(-6px)}75%{transform:rotate(-1deg) translateX(6px)}}
 .entry-wrap.lift{transform:rotate(-2deg) translateY(-12px) scale(1.03);filter:drop-shadow(0 30px 17px rgba(40,22,6,.35))}
 .entry-wrap.away{transform:rotate(-5deg) translateY(-36px) scale(.97);opacity:0}
+.entry-wrap.submitting{animation:entryLiftAway .38s ease both}
+@keyframes entryLiftAway{
+  0%{transform:none;filter:none;opacity:1}
+  47%{transform:rotate(-2deg) translateY(-12px) scale(1.03);filter:drop-shadow(0 30px 17px rgba(40,22,6,.35));opacity:1}
+  100%{transform:rotate(-5deg) translateY(-36px) scale(.97);filter:drop-shadow(0 30px 17px rgba(40,22,6,.35));opacity:0}
+}
 
 /* postage stamp */
 .stamp{position:absolute;width:74px;height:90px;padding:5px;z-index:2;

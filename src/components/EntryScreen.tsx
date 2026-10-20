@@ -12,12 +12,17 @@ export function EntryScreen({
 }) {
   const [name, setName] = useState(initialName)
   const [error, setError] = useState('')
-  const [transition, setTransition] = useState<'idle' | 'lift' | 'away'>('idle')
+  const [submitting, setSubmitting] = useState(false)
+  const [returningActive, setReturningActive] = useState(returning)
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     setName(initialName)
-    if (returning) inputRef.current?.select()
+    if (!returning) return
+    setReturningActive(true)
+    inputRef.current?.select()
+    const timer = window.setTimeout(() => setReturningActive(false), 420)
+    return () => window.clearTimeout(timer)
   }, [initialName, returning])
 
   function submit(event: FormEvent) {
@@ -32,14 +37,14 @@ export function EntryScreen({
       onSubmit(name)
       return
     }
-    setTransition('lift')
-    window.setTimeout(() => setTransition('away'), 180)
+    setReturningActive(false)
+    setSubmitting(true)
     window.setTimeout(() => onSubmit(name), 380)
   }
 
   return (
-    <main id="entry" className={returning ? 'returning' : ''} aria-labelledby="entry-title">
-      <div className={`entry-wrap ${transition === 'lift' ? 'lift' : transition === 'away' ? 'lift away' : ''}`}>
+    <main id="entry" className={returningActive ? 'returning' : ''} aria-labelledby="entry-title">
+      <div className={`entry-wrap ${submitting ? 'submitting' : ''}`}>
         <span className="logo-st e-logo deco" aria-hidden="true" />
         <img className="cut deco" src="/assets/cut/s-ladybug.png" alt="" aria-hidden="true" style={{ width: 56, left: -18, top: -30, transform: 'rotate(45deg)' }} />
         <form className={`card paper-noise ${error ? 'shake' : ''}`} noValidate onSubmit={submit}>
