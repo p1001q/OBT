@@ -49,7 +49,7 @@ export function BoardScreen({
 
   return (
     <main id="board" className={leaving ? 'leaving' : 'arrive'} aria-label="OBT board">
-      <button className={`board-back ${leaving ? 'pressed' : ''}`} type="button" aria-label="이름 입력 화면으로 돌아가기" onClick={goBack}><img src="/assets/cut/back-chevron-patch.png" alt="" aria-hidden="true" /></button>
+      <button className={`board-back ${leaving ? 'pressed' : ''}`} type="button" aria-label="이름 입력 화면으로 돌아가기" onClick={goBack}><img src="/assets/cut/back-chevron-patch.webp" alt="" aria-hidden="true" /></button>
       <div className="layout">
         <BoardHeader />
         <StatusControls entry={entry} onTogglePlanned={onTogglePlanned} onToggleRoom={onToggleRoom} onToggleRide={onToggleRide} />
@@ -58,11 +58,11 @@ export function BoardScreen({
         {error && <p className="board-message board-error" role="alert">{error} <button type="button" onClick={onRetry}>Try again</button></p>}
         {!loading && !error && (
           <div className="notes">
-            <div className="rs-row rs-2 deco" aria-hidden="true"><img className="redstars" src="/assets/cut/redstars.png" alt="" /></div>
+            <div className="rs-row rs-2 deco" aria-hidden="true"><img className="redstars" src="/assets/cut/redstars.webp" alt="" /></div>
             <StatusNote kind="plan" members={planned} me={entry.planned ? me : null} onRemoveMe={() => onClearList('plan')} />
-            <div className="rs-row deco" aria-hidden="true"><img className="redstars" src="/assets/cut/redstars.png" alt="" /></div>
+            <div className="rs-row deco" aria-hidden="true"><img className="redstars" src="/assets/cut/redstars.webp" alt="" /></div>
             <StatusNote kind="room" members={room} me={entry.location === 'room' ? me : null} onRemoveMe={() => onClearList('room')} />
-            <div className="fish-row deco" aria-hidden="true"><img src="/assets/cut/fish.png" alt="" /></div>
+            <div className="fish-row deco" aria-hidden="true"><img src="/assets/cut/fish.webp" alt="" /></div>
             <StatusNote kind="ride" members={riding} me={entry.location === 'ride' ? me : null} onRemoveMe={() => onClearList('ride')} />
           </div>
         )}

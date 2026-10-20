@@ -47,8 +47,8 @@ export function NameSticker({
 
   return (
     <div className={`sticker ${isMe ? `me ${removing ? 'out' : 'in'}` : `tape-photo tape-${tape}`} ${hash(member.id + list) % 2 ? 'tr-a' : 'tr-b'}`} role="listitem" style={style}>
-      <img className={`tex ${isMe ? '' : 'tape-design'}`} src={isMe ? '/assets/cut/tape-gold.png' : `/assets/tape/tape-${tape}.png`} alt="" aria-hidden="true" />
-      {isMe && <img className="me-star" src="/assets/cut/star-red.png" alt="" aria-hidden="true" />}
+      <img className={`tex ${isMe ? '' : 'tape-design'}`} src={isMe ? '/assets/cut/tape-gold.webp' : `/assets/tape/tape-${tape}.webp`} alt="" aria-hidden="true" />
+      {isMe && <img className="me-star" src="/assets/cut/star-red.webp" alt="" aria-hidden="true" />}
       <span className="nm">{member.name}</span>
       {isMe && !removing && (
         <button className="x" type="button" aria-label={removeLabel} onClick={onRemove}>

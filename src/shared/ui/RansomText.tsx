@@ -19,7 +19,7 @@ export function RansomText({ text, wordIndex = 0 }: { text: string; wordIndex?: 
         return (
           <img
             key={`${character}-${index}`}
-            src={`/assets/cut/L-${character}${variant}.png`}
+            src={`/assets/cut/L-${character}${variant}.webp`}
             alt=""
             style={{ transform: `rotate(${rotation}deg) translateY(${vertical * 2}px)` }}
           />

@@ -17,18 +17,18 @@ export function StatusControls({
 
   return (
     <div className="ctrl-wrap">
-      <img className="patch patch-h deco" src="/assets/cut/patch-heart.png" alt="" aria-hidden="true" />
-      <img className="patch patch-s deco" src="/assets/cut/patch-star.png" alt="" aria-hidden="true" />
+      <img className="patch patch-h deco" src="/assets/cut/patch-heart.webp" alt="" aria-hidden="true" />
+      <img className="patch patch-s deco" src="/assets/cut/patch-star.webp" alt="" aria-hidden="true" />
       <section className="ctrl" aria-labelledby="ctrlTitle">
-        <img className="paper deco" src="/assets/cut/note-gray-pk.png" alt="" aria-hidden="true" />
-        <div className="nametag" aria-hidden="true"><img src="/assets/cut/nametag.png" alt="" /><span className="nt-name" style={{ fontSize: nameSize }}>{entry.name}</span></div>
+        <img className="paper deco" src="/assets/cut/note-gray-pk.webp" alt="" aria-hidden="true" />
+        <div className="nametag" aria-hidden="true"><img src="/assets/cut/nametag.webp" alt="" /><span className="nt-name" style={{ fontSize: nameSize }}>{entry.name}</span></div>
         <h2 id="ctrlTitle" className="sr">My status</h2>
         <div className="btns">
           <button className="sbtn plan" type="button" aria-pressed={entry.planned} onClick={onTogglePlanned}>
-            <img className="slip" src="/assets/cut/card-s.png" alt="" aria-hidden="true" /><span className="tint" aria-hidden="true" />
-            <img className="pclip" src="/assets/cut/paperclip.png" alt="" aria-hidden="true" />
-            <img className="cut nob ico i-star1" src="/assets/cut/star-gold-t.png" alt="" aria-hidden="true" />
-            <img className="cut nob ico i-star2" src="/assets/cut/star-holo-t.png" alt="" aria-hidden="true" />
+            <img className="slip" src="/assets/cut/card-s.webp" alt="" aria-hidden="true" /><span className="tint" aria-hidden="true" />
+            <img className="pclip" src="/assets/cut/paperclip.webp" alt="" aria-hidden="true" />
+            <img className="cut nob ico i-star1" src="/assets/cut/star-gold-t.webp" alt="" aria-hidden="true" />
+            <img className="cut nob ico i-star2" src="/assets/cut/star-holo-t.webp" alt="" aria-hidden="true" />
             <span className="lbl">Riding today</span>
             <span className="sw" aria-hidden="true"><span className="swt">{entry.planned ? 'ON' : 'OFF'}</span><span className="trk" /></span>
           </button>
@@ -48,9 +48,9 @@ function LocationButton({ kind, active, onClick }: { kind: 'room' | 'ride'; acti
   const isRoom = kind === 'room'
   return (
     <button className={`sbtn ${kind}`} type="button" aria-pressed={active} onClick={onClick}>
-      <img className="slip" src="/assets/cut/card-s.png" alt="" aria-hidden="true" /><span className="tint" aria-hidden="true" />
-      <img className="pclip" src="/assets/cut/paperclip.png" alt="" aria-hidden="true" />
-      <img className={`cut ico ${isRoom ? 'i-sofa' : 'i-sign'}`} src={isRoom ? '/assets/cut/sofa.png' : '/assets/cut/skatesign.png'} alt="" aria-hidden="true" />
+      <img className="slip" src="/assets/cut/card-s.webp" alt="" aria-hidden="true" /><span className="tint" aria-hidden="true" />
+      <img className="pclip" src="/assets/cut/paperclip.webp" alt="" aria-hidden="true" />
+      <img className={`cut ico ${isRoom ? 'i-sofa' : 'i-sign'}`} src={isRoom ? '/assets/cut/sofa.webp' : '/assets/cut/skatesign.webp'} alt="" aria-hidden="true" />
       <span className="lbl">{isRoom ? 'In the club room' : 'Out riding'}<span className="state-word">{active ? '✓ Here now!' : 'Tap to mark'}</span></span>
       <span className="tick" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24"><polyline points="4,12 10,18 20,6" fill="none" stroke="#f6f2ea" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
     </button>

@@ -1,4 +1,4 @@
-@font-face{font-family:'OZ Marker';src:url('/fonts/OZMarker-Regular.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'OZ Marker';src:url('/fonts/OZMarker-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 :root{
   --ink:#3b2a22;
   --ink-soft:#6a5d51;
@@ -71,7 +71,7 @@ body.bgfixed .cork{background-attachment:fixed}
 .wm2{top:1180px;left:12%;width:200px;margin-left:0;transform:rotate(18deg);opacity:.12}
 .wm-top{top:-70px;left:auto;right:-110px;width:330px;margin-left:0;transform:rotate(12deg);opacity:.2}
 .logo-st{position:absolute;width:84px;height:84px;border-radius:50%;z-index:2;
-  background:url('/assets/oz-logo-circle.png') center/cover;
+  background:url('/assets/oz-logo-circle.webp') center/cover;
   box-shadow:0 0 0 3px #efe7d6, 0 6px 8px -2px rgba(40,22,6,.5);filter:sepia(.25) saturate(.85) contrast(.95)}
 .logo-st::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--noise);background-size:110px;opacity:.35;mix-blend-mode:multiply}
 .coffee{position:absolute;width:118px;height:118px;border-radius:50%;pointer-events:none;z-index:4;mix-blend-mode:multiply;
@@ -346,10 +346,10 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .mini{position:absolute;border-radius:50%;z-index:3;box-shadow:0 0 0 2px #efe7d6, 0 4px 5px -1px rgba(40,22,6,.5)}
 .mini::after{content:"";position:absolute;inset:0;border-radius:50%;
   background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.55) 0 8%, rgba(255,255,255,0) 32%), radial-gradient(circle at 50% 50%, transparent 62%, rgba(0,0,0,.18) 100%)}
-.mini.m1{width:38px;height:38px;left:-30px;top:2px;transform:rotate(-12deg);background:url('/assets/cut/s-cherry.png') center/112% no-repeat #f2b7b6}
+.mini.m1{width:38px;height:38px;left:-30px;top:2px;transform:rotate(-12deg);background:url('/assets/cut/s-cherry.webp') center/112% no-repeat #f2b7b6}
 .mini.m2{width:30px;height:30px;left:-14px;top:46px;transform:rotate(10deg);
   background:radial-gradient(circle, #f3ead6 22%, transparent 25%) 0 0/9px 9px, #c79a3c}
-.mini.m3{width:34px;height:34px;left:62px;top:60px;transform:rotate(16deg);background:url('/assets/cut/s-solar.png') center/108% no-repeat #3b2a22}
+.mini.m3{width:34px;height:34px;left:62px;top:60px;transform:rotate(16deg);background:url('/assets/cut/s-solar.webp') center/108% no-repeat #3b2a22}
 
 /* titles */
 .title{margin:0;line-height:0;transform:rotate(-2deg)}
@@ -600,7 +600,7 @@ body.framed .cork{min-height:816px;border-radius:30px 30px 2px 2px}
 .sbtn .pclip{width:24px!important;top:calc(50% - 27px)!important;left:-4px!important;right:auto!important;transform:rotate(-90deg)!important;z-index:5!important}
 .sbtn.ride .pclip{left:auto!important;right:-4px!important;transform:rotate(90deg)!important}
 .confetti{position:absolute;left:0;right:0;top:0;height:620px;z-index:0;pointer-events:none;
-  background:url('/assets/cut/confetti.png') 0 -30px/380px auto repeat-x;opacity:.85;filter:saturate(.75) sepia(.1);
+  background:url('/assets/cut/confetti.webp') 0 -30px/380px auto repeat-x;opacity:.85;filter:saturate(.75) sepia(.1);
   -webkit-mask:linear-gradient(#000 0 45%, transparent 100%);mask:linear-gradient(#000 0 45%, transparent 100%)}
 @container app (min-width:760px){ .confetti{height:760px;background-size:520px auto} }
 .head{min-height:0!important}

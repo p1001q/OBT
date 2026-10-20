@@ -57,20 +57,20 @@ export function StatusNote({
 
   return (
     <section className={`note paper-noise ${detail.className}`} aria-labelledby={`h-${kind}`}>
-      {kind === 'plan' && <img className="pinimg deco" src="/assets/cut/p-pin.png" alt="" aria-hidden="true" style={{ top: -24, left: '50%', marginLeft: -18 }} />}
-      {kind === 'room' && <img className="clip deco" src="/assets/cut/cGreen2-h.png" alt="" aria-hidden="true" style={{ width: 80, top: -66, left: '22%', transform: 'rotate(-3deg)' }} />}
-      {kind === 'ride' && <><img className="clip deco" src="/assets/cut/cMint-h.png" alt="" aria-hidden="true" style={{ width: 72, top: -62, left: '60%', transform: 'rotate(5deg)' }} /><span className="tape deco" aria-hidden="true" style={{ top: -10, right: -12, width: 62, transform: 'rotate(38deg)', '--tc': 'rgba(176,160,190,.7)' } as CSSProperties} /></>}
+      {kind === 'plan' && <img className="pinimg deco" src="/assets/cut/p-pin.webp" alt="" aria-hidden="true" style={{ top: -24, left: '50%', marginLeft: -18 }} />}
+      {kind === 'room' && <img className="clip deco" src="/assets/cut/cGreen2-h.webp" alt="" aria-hidden="true" style={{ width: 80, top: -66, left: '22%', transform: 'rotate(-3deg)' }} />}
+      {kind === 'ride' && <><img className="clip deco" src="/assets/cut/cMint-h.webp" alt="" aria-hidden="true" style={{ width: 72, top: -62, left: '60%', transform: 'rotate(5deg)' }} /><span className="tape deco" aria-hidden="true" style={{ top: -10, right: -12, width: 62, transform: 'rotate(38deg)', '--tc': 'rgba(176,160,190,.7)' } as CSSProperties} /></>}
       <div className="note-h">
-        {kind === 'plan' && <><img className="dog deco" src="/assets/cut/dog.png" alt="" aria-hidden="true" /><img className="cut deco star-gs" src="/assets/cut/star-red.png" alt="" aria-hidden="true" /></>}
+        {kind === 'plan' && <><img className="dog deco" src="/assets/cut/dog.webp" alt="" aria-hidden="true" /><img className="cut deco star-gs" src="/assets/cut/star-red.webp" alt="" aria-hidden="true" /></>}
         <div className="nh-txt"><span className="pc-lbl deco" aria-hidden="true">POST CARD · 0{kind === 'plan' ? 1 : kind === 'room' ? 2 : 3}</span>
           <h2 id={`h-${kind}`} aria-label={detail.label}><RansomText text={detail.title} wordIndex={detail.index} /></h2>
           <span className="note-sub deco" aria-hidden="true">{detail.subtitle}</span>
           <span className="count"><b>{count}</b> <span className="ppl">people</span></span>
         </div>
         <Postmark />
-        {kind === 'plan' && <img className="st-img deco goskate" src="/assets/cut/goskate.png" alt="" aria-hidden="true" />}
-        {kind === 'room' && <><img className="st-img deco goose" src="/assets/cut/goose-stamp.png" alt="" aria-hidden="true" /><img className="sofa2 deco" src="/assets/cut/sofa2.png" alt="" aria-hidden="true" /></>}
-        {kind === 'ride' && <><img className="st-img deco peng" src="/assets/cut/s-penguin.png" alt="" aria-hidden="true" style={{ width: 44, transform: 'rotate(6deg)' }} /><span className="badge-sk deco" aria-hidden="true"><img src="/assets/cut/badge-skate.png" alt="" /></span></>}
+        {kind === 'plan' && <img className="st-img deco goskate" src="/assets/cut/goskate.webp" alt="" aria-hidden="true" />}
+        {kind === 'room' && <><img className="st-img deco goose" src="/assets/cut/goose-stamp.webp" alt="" aria-hidden="true" /><img className="sofa2 deco" src="/assets/cut/sofa2.webp" alt="" aria-hidden="true" /></>}
+        {kind === 'ride' && <><img className="st-img deco peng" src="/assets/cut/s-penguin.webp" alt="" aria-hidden="true" style={{ width: 44, transform: 'rotate(6deg)' }} /><span className="badge-sk deco" aria-hidden="true"><img src="/assets/cut/badge-skate.webp" alt="" /></span></>}
       </div>
       <div className="stickers" role="list">
         {allMembers.map((member) => <NameSticker key={member.id} member={member} list={kind} isMe={member.id === 'me'} removing={member.id === 'me' && !me} onRemove={member.id === 'me' ? onRemoveMe : undefined} />)}

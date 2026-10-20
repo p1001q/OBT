@@ -5,7 +5,7 @@ export function Beads({ children }: { children: string }) {
         <span
           className="bead"
           key={`${character}-${index}`}
-          style={{ backgroundImage: `url(/assets/cut/b2-${character}.png)` }}
+          style={{ backgroundImage: `url(/assets/cut/b2-${character}.webp)` }}
         />
       ))}
     </span>

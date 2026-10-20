@@ -72,13 +72,13 @@ export function EntryScreen({
     <main id="entry" className={returningActive ? 'returning' : ''} aria-labelledby="entry-title">
       <div className={`entry-wrap ${submitting ? 'submitting' : ''}`}>
         <span className="logo-st e-logo deco" aria-hidden="true" />
-        <img className="cut ladybug-door" src="/assets/cut/s-ladybug.png" alt="" aria-hidden="true" draggable={false} onClick={openAdmin} style={{ width: 56, left: -18, top: -30, transform: 'rotate(45deg)' }} />
+        <img className="cut ladybug-door" src="/assets/cut/s-ladybug.webp" alt="" aria-hidden="true" draggable={false} onClick={openAdmin} style={{ width: 56, left: -18, top: -30, transform: 'rotate(45deg)' }} />
         <form className={`card paper-noise ${error ? 'shake' : ''}`} noValidate onSubmit={submit}>
           <span className="pin clear deco" aria-hidden="true" />
           <p className="kicker">OBT · Who's riding today</p>
           <h1 id="entry-title" className="e-h1">
             <span className="deco" style={{ '--rh': '40px' } as CSSProperties}><RansomText text="HEY" /></span>
-            <img className="ex deco" src="/assets/cut/p-ex.png" alt="" aria-hidden="true" />
+            <img className="ex deco" src="/assets/cut/p-ex.webp" alt="" aria-hidden="true" />
             <span className="h1t">Write your name on a&nbsp;new sticker</span>
           </h1>
           <label className="sr" htmlFor="nameIn">Name</label>
@@ -87,7 +87,7 @@ export function EntryScreen({
           <button className="go" type="submit" disabled={checking && !submitting}>Pin it to the board</button>
         </form>
         <div className="e-scrap deco" aria-hidden="true"><span className="tape" />who's riding?</div>
-        <img className="cut deco" src="/assets/cut/s-sardine.png" alt="" aria-hidden="true" style={{ width: 78, right: -8, bottom: -48, transform: 'rotate(12deg)' }} />
+        <img className="cut deco" src="/assets/cut/s-sardine.webp" alt="" aria-hidden="true" style={{ width: 78, right: -8, bottom: -48, transform: 'rotate(12deg)' }} />
       </div>
     </main>
   )
