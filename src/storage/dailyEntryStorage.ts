@@ -9,6 +9,8 @@ export interface DailyEntry extends MemberStatus {
   memberId: string | null
 }
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
 export interface StorageLike {
   getItem(key: string): string | null
   setItem(key: string, value: string): void
@@ -31,11 +33,15 @@ export function readDailyEntry(storage: StorageLike, today: string): DailyEntry 
       storage.removeItem(DAILY_ENTRY_KEY)
       return null
     }
+    // 서버 연동 이전 버전이 남긴 `local-…` 같은 값은 서버 입장자 ID가 아니므로 버리고 상태도 비운다.
+    if (typeof value.memberId !== 'string' || !UUID.test(value.memberId)) {
+      return { name: value.name, day: value.day, clientNonce: value.clientNonce, memberId: null, planned: false, location: null }
+    }
     return {
       name: value.name,
       day: value.day,
       clientNonce: value.clientNonce,
-      memberId: typeof value.memberId === 'string' ? value.memberId : null,
+      memberId: value.memberId,
       planned: value.planned,
       location: value.location ?? null,
     }
