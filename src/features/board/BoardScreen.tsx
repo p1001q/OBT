@@ -11,6 +11,7 @@ export function BoardScreen({
   members,
   loading,
   error,
+  actionError,
   onBack,
   onRetry,
   onTogglePlanned,
@@ -22,6 +23,7 @@ export function BoardScreen({
   members: BoardMember[]
   loading: boolean
   error: string | null
+  actionError: string | null
   onBack: () => void
   onRetry: () => void
   onTogglePlanned: () => void
@@ -51,6 +53,7 @@ export function BoardScreen({
       <div className="layout">
         <BoardHeader />
         <StatusControls entry={entry} onTogglePlanned={onTogglePlanned} onToggleRoom={onToggleRoom} onToggleRide={onToggleRide} />
+        {actionError && <p className="board-message board-error" role="alert">{actionError}</p>}
         {loading && <p className="board-message" role="status">Loading today's board…</p>}
         {error && <p className="board-message board-error" role="alert">{error} <button type="button" onClick={onRetry}>Try again</button></p>}
         {!loading && !error && (

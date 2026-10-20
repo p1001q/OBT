@@ -16,13 +16,14 @@ export function BoardPage() {
         <img className="wm wm-top deco" src="/assets/oz-logo.png" alt="" aria-hidden="true" />
         <div className="confetti deco" aria-hidden="true" />
         {app.screen === 'entry' || !app.entry ? (
-          <EntryScreen initialName={app.entry?.name ?? ''} returning={Boolean(app.entry)} onSubmit={app.enter} />
+          <EntryScreen initialName={app.entry?.name ?? ''} returning={Boolean(app.entry)} onCheck={app.checkEntry} onSubmit={app.enter} />
         ) : (
           <BoardScreen
             entry={app.entry}
             members={app.members}
             loading={app.loading}
             error={app.error}
+            actionError={app.actionError}
             onBack={app.showEntry}
             onRetry={app.retry}
             onTogglePlanned={app.togglePlanned}

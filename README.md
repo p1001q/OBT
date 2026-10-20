@@ -55,8 +55,16 @@
 
 ```bash
 npm install
+cp .env.example .env
 npm run dev
 ```
+
+`.env`에 Supabase 프로젝트 URL과 Publishable key를 채움. Secret key는 넣지 않음
+
+| 변수 | 값 |
+|---|---|
+| `VITE_SUPABASE_URL` | 프로젝트 URL (`https://xxxx.supabase.co`) |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Publishable key (`sb_publishable_...`) |
 
 타입 검사, 핵심 상태 규칙 테스트, 프로덕션 빌드는 각각 다음 명령으로 확인함
 
@@ -66,11 +74,19 @@ npm test
 npm run build
 ```
 
-현재 프론트엔드는 프로토타입의 가짜 팀원 데이터와 브라우저 `localStorage`를 사용함. `/admin`은 다음 Supabase 단계에서 실제 기능을 연결할 수 있도록 경로만 예약해 둠
+## Supabase 설정
+
+1. Supabase 프로젝트를 만들고 SQL Editor에서 `supabase/schema.sql`, `supabase/functions.sql` 순서로 실행함
+2. `supabase/seed-admin.sql.example`을 `supabase/seed-admin.sql`로 복사해 비밀번호를 채우고 실행함
+3. 배포된 RPC는 다음 명령으로 검증함. 임시 이름을 만들고 끝나면 삭제함
+
+```bash
+ADMIN_PW=비밀번호 node --env-file=.env scripts/test-rpc.mjs
+```
 
 ## 현재 상태
 
-Vite + React + TypeScript 프론트엔드 1단계가 구성되어 있음. Supabase, RPC, 관리자 기능은 아직 연결하지 않음
+사용자 화면(`/`)이 Supabase RPC와 연결되어 있음. 명단 대조, 상태 저장, 10초 자동 갱신, 날짜 변경 처리를 포함함. 관리자 화면(`/admin`)은 아직 자리표시자임
 
 ## 라이선스
 

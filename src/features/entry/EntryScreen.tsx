@@ -1,18 +1,22 @@
 import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from 'react'
+import type { EntryCheck } from '../../hooks/useBoardApp'
 import { RansomText } from '../../shared/ui/RansomText'
 
 export function EntryScreen({
   initialName,
   returning,
+  onCheck,
   onSubmit,
 }: {
   initialName: string
   returning: boolean
+  onCheck: (name: string) => Promise<EntryCheck>
   onSubmit: (name: string) => boolean
 }) {
   const [name, setName] = useState(initialName)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const [checking, setChecking] = useState(false)
   const [returningActive, setReturningActive] = useState(returning)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -25,14 +29,23 @@ export function EntryScreen({
     return () => window.clearTimeout(timer)
   }, [initialName, returning])
 
-  function submit(event: FormEvent) {
+  async function submit(event: FormEvent) {
     event.preventDefault()
+    if (checking || submitting) return
     if (!name.trim()) {
       setError('Write at least one letter')
       inputRef.current?.focus()
       return
     }
     setError('')
+    setChecking(true)
+    const result = await onCheck(name)
+    if (!result.ok) {
+      setChecking(false)
+      if (result.message) setError(result.message)
+      inputRef.current?.focus()
+      return
+    }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       onSubmit(name)
       return
@@ -58,7 +71,7 @@ export function EntryScreen({
           <label className="sr" htmlFor="nameIn">Name</label>
           <input ref={inputRef} className="field" id="nameIn" name="name" type="text" autoComplete="nickname" maxLength={12} placeholder="e.g. 김민서" value={name} onChange={(event) => { setName(event.target.value); if (event.target.value.trim()) setError('') }} />
           <p className="err" role="alert">{error}</p>
-          <button className="go" type="submit">Pin it to the board</button>
+          <button className="go" type="submit" disabled={checking && !submitting}>Pin it to the board</button>
         </form>
         <div className="e-scrap deco" aria-hidden="true"><span className="tape" />who's riding?</div>
         <img className="cut deco" src="/assets/cut/s-sardine.png" alt="" aria-hidden="true" style={{ width: 78, right: -8, bottom: -48, transform: 'rotate(12deg)' }} />
