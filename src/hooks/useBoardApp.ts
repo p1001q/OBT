@@ -70,17 +70,19 @@ export function useBoardApp() {
   const enter = useCallback((name: string) => {
     const trimmed = name.trim()
     if (!trimmed) return false
-    const next: DailyEntry = {
-      name: trimmed,
-      day: getKstDay(),
-      clientNonce: makeNonce(),
-      memberId: null,
-      ...EMPTY_STATUS,
-    }
+    const next: DailyEntry = entry
+      ? { ...entry, name: trimmed, day: getKstDay() }
+      : {
+          name: trimmed,
+          day: getKstDay(),
+          clientNonce: makeNonce(),
+          memberId: null,
+          ...EMPTY_STATUS,
+        }
     persist(next)
     setScreen('board')
     return true
-  }, [persist])
+  }, [entry, persist])
 
   const updateStatus = useCallback((rule: (status: MemberStatus) => MemberStatus, message: string) => {
     if (!entry) return
