@@ -273,7 +273,8 @@ begin
     'day', v_today,
     'roster', coalesce((
       select jsonb_agg(jsonb_build_object(
-               'id', r.id, 'name', r.name, 'created_at', r.created_at, 'member_id', m.id
+               'id', r.id, 'name', r.name, 'student_id', r.student_id,
+               'created_at', r.created_at, 'member_id', m.id
              ) order by r.created_at, r.id)
         from public.roster r
         left join public.members m on m.roster_id = r.id and m.day = v_today
@@ -301,33 +302,59 @@ begin
 end;
 $$;
 
--- 빈 줄을 제외하고 일괄 추가한다. 중복 이름을 허용하며, 입력 순서를 created_at에 반영한다.
--- 추가한 행 수를 반환한다.
-create or replace function public.admin_add(p_pw text, p_names text[])
-returns int
+-- 명단을 일괄 추가한다. p_entries는 [{"name": "김민서", "student_id": "2026000001"}, ...] 형태다.
+-- 이름이 비어 있는 항목은 건너뛰고, student_id는 없어도 된다(없으면 중복 검사 없이 추가).
+-- 이미 등록된 학번은 추가하지 않는다. 같은 이름이라도 학번이 다르면 동명이인 자리로 추가한다.
+-- 입력 순서를 created_at에 반영하고 {"added": 추가한 수, "skipped": 학번 중복으로 건너뛴 수}를 반환한다.
+drop function if exists public.admin_add(text, text[]);
+
+create or replace function public.admin_add(p_pw text, p_entries jsonb)
+returns jsonb
 language plpgsql
 security definer
 set search_path = ''
 as $$
 declare
-  v_count int;
+  v_valid int;
+  v_added int;
 begin
   perform public.admin_check(p_pw);
 
-  if p_names is null or cardinality(p_names) > 500 then
-    raise exception 'INVALID_REQUEST';
-  end if;
-  if exists (select 1 from unnest(p_names) as n where char_length(btrim(n)) > 30) then
+  if p_entries is null or jsonb_typeof(p_entries) <> 'array' or jsonb_array_length(p_entries) > 500 then
     raise exception 'INVALID_REQUEST';
   end if;
 
-  insert into public.roster (name, created_at)
-  select btrim(t.n), clock_timestamp() + t.o * interval '1 microsecond'
-    from unnest(p_names) with ordinality as t(n, o)
-   where btrim(t.n) <> '';
+  if exists (
+    select 1
+      from jsonb_array_elements(p_entries) as t(e)
+     where char_length(btrim(coalesce(t.e ->> 'name', ''))) > 30
+        or (nullif(btrim(coalesce(t.e ->> 'student_id', '')), '') is not null
+            and btrim(t.e ->> 'student_id') !~ '^[0-9]{5,20}$')
+  ) then
+    raise exception 'INVALID_REQUEST';
+  end if;
 
-  get diagnostics v_count = row_count;
-  return v_count;
+  with input as (
+    select t.o::int as ord,
+           btrim(coalesce(t.e ->> 'name', '')) as name,
+           nullif(btrim(coalesce(t.e ->> 'student_id', '')), '') as student_id
+      from jsonb_array_elements(p_entries) with ordinality as t(e, o)
+  ),
+  valid as (
+    select * from input where name <> ''
+  ),
+  inserted as (
+    insert into public.roster (name, student_id, created_at)
+    select v.name, v.student_id, clock_timestamp() + v.ord * interval '1 microsecond'
+      from valid v
+     order by v.ord
+    on conflict (student_id) where student_id is not null do nothing
+    returning 1
+  )
+  select (select count(*) from valid), (select count(*) from inserted)
+    into v_valid, v_added;
+
+  return jsonb_build_object('added', v_added, 'skipped', v_valid - v_added);
 end;
 $$;
 
@@ -394,7 +421,7 @@ grant execute on function
   public.set_location(uuid, text),
   public.leave_today(uuid),
   public.admin_list(text),
-  public.admin_add(text, text[]),
+  public.admin_add(text, jsonb),
   public.admin_remove(text, uuid),
   public.admin_remove_member(text, uuid),
   public.admin_reset(text)

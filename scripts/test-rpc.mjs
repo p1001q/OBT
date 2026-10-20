@@ -26,8 +26,25 @@ try {
   const unauth = await rpc('admin_list', { p_pw: 'wrong' })
   check('잘못된 비밀번호는 ADMIN_UNAUTHORIZED', unauth.error?.message === 'ADMIN_UNAUTHORIZED', JSON.stringify(unauth.error))
 
-  const added = await rpc('admin_add', { p_pw: pw, p_names: [name, name, '', '  '] })
-  check('동명이인 2명 추가, 빈 줄 제외', added.data === 2, JSON.stringify(added))
+  const homonym = { name, student_id: null }
+  const added = await rpc('admin_add', { p_pw: pw, p_entries: [homonym, homonym, { name: '' }, { name: '  ' }] })
+  check('동명이인 2명 추가, 빈 이름 제외', added.data?.added === 2 && added.data?.skipped === 0, JSON.stringify(added))
+
+  // 학번 중복 방지: 같은 학번은 한 번만, 다시 보내도 추가되지 않음
+  const sid = `9${Math.floor(Math.random() * 1e9).toString().padStart(9, '0')}`
+  const idName = `${name}_id`
+  const byId = await rpc('admin_add', { p_pw: pw, p_entries: [{ name: idName, student_id: sid }, { name: idName, student_id: sid }] })
+  check('같은 학번은 한 번만 추가', byId.data?.added === 1 && byId.data?.skipped === 1, JSON.stringify(byId))
+  const again = await rpc('admin_add', { p_pw: pw, p_entries: [{ name: idName, student_id: sid }] })
+  check('이미 등록된 학번은 건너뜀', again.data?.added === 0 && again.data?.skipped === 1, JSON.stringify(again))
+  const other = await rpc('admin_add', { p_pw: pw, p_entries: [{ name: idName, student_id: `${sid}0` }] })
+  check('같은 이름이라도 학번이 다르면 동명이인으로 추가', other.data?.added === 1, JSON.stringify(other))
+  const badId = await rpc('admin_add', { p_pw: pw, p_entries: [{ name: idName, student_id: 'abc' }] })
+  check('잘못된 학번은 INVALID_REQUEST', badId.error?.message === 'INVALID_REQUEST', JSON.stringify(badId.error))
+  const listed = await rpc('admin_list', { p_pw: pw })
+  check('admin_list에 학번 포함', listed.data?.roster?.some((r) => r.student_id === sid), '')
+  await cleanup()
+  await rpc('admin_add', { p_pw: pw, p_entries: [homonym, homonym] })
 
   const none = await rpc('register', { p_name: '__test_없는이름', p_client_nonce: randomUUID() })
   check('명단에 없는 이름은 NAME_NOT_FOUND', none.error?.message === 'NAME_NOT_FOUND', JSON.stringify(none.error))
@@ -42,7 +59,7 @@ try {
   check('나머지 4건은 NAME_SLOTS_FULL', full.length === 4, `full=${full.length}`)
 
   await cleanup()
-  await rpc('admin_add', { p_pw: pw, p_names: [name, name] })
+  await rpc('admin_add', { p_pw: pw, p_entries: [homonym, homonym] })
 
   // 같은 nonce 동시 재시도: 입장자 1명
   const nonce = randomUUID()
@@ -65,6 +82,7 @@ try {
   const mine = board.data?.riding?.filter((x) => x.is_me) ?? []
   check('get_board에 본인이 is_me로 표시', mine.length === 1, JSON.stringify(board.data))
   check('get_board 응답에 member_id 미포함', !JSON.stringify(board.data).includes(id))
+  check('get_board 응답에 학번 미포함', !JSON.stringify(board.data).includes('student_id'))
 
   const off = await rpc('set_location', { p_member_id: id, p_location: null })
   const off2 = await rpc('set_planned', { p_member_id: id, p_on: false })

@@ -5,12 +5,21 @@
 create extension if not exists pgcrypto with schema extensions;
 
 -- 학기 명단. 같은 이름의 행이 여러 개일 수 있으며, 각 행이 한 명의 자리다.
+-- student_id는 관리자가 명단을 넣을 때 같은 사람의 중복 등록을 막는 데만 쓴다.
+-- 사용자 화면과 공개 RPC에는 노출하지 않는다.
 create table if not exists public.roster (
   id         uuid primary key default gen_random_uuid(),
   name       text not null
              check (char_length(name) between 1 and 30 and name = btrim(name)),
   created_at timestamptz not null default now()
 );
+
+alter table public.roster
+  add column if not exists student_id text check (student_id ~ '^[0-9]{5,20}$');
+
+-- 같은 학번은 한 번만 등록할 수 있다. 학번이 없는 행은 제한하지 않는다.
+create unique index if not exists roster_student_id_key
+  on public.roster (student_id) where student_id is not null;
 
 -- 상태를 처음 누를 때 생성되는 날짜별 입장자. day는 KST 기준 날짜다.
 create table if not exists public.members (
