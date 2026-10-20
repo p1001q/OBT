@@ -210,7 +210,6 @@ export function useBoardApp() {
     checkEntry,
     enter,
     showEntry: () => setScreen('entry'),
-    showBoard: () => entry && setScreen('board'),
     retry: () => loadBoard(),
     togglePlanned: () => updateStatus(togglePlanned, entry?.planned ? 'Removed from Riding today' : 'Pinned to Riding today'),
     toggleRoom: () => updateStatus((status) => toggleLocation(status, 'room'), entry?.location === 'room' ? 'Removed from Club room' : 'Pinned to Club room'),
