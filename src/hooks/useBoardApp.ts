@@ -5,7 +5,7 @@ import {
   type BoardSnapshot,
   type RepositoryErrorCode,
 } from '../data/boardRepository'
-import { ERROR_MESSAGES } from '../data/errorMessages'
+import { ERROR_MESSAGES, ROSTER_EMPTY_MESSAGE } from '../data/errorMessages'
 import { SupabaseBoardRepository } from '../data/supabaseBoardRepository'
 import { getKstDay } from '../domain/kstDate'
 import {
@@ -150,7 +150,7 @@ export function useBoardApp() {
     if (current && current.name === trimmed) return { ok: true }
     try {
       const result = await repository.checkName(trimmed)
-      if (!result.found) return { ok: false, message: ERROR_MESSAGES.NAME_NOT_FOUND }
+      if (!result.found) return { ok: false, message: result.rosterEmpty ? ROSTER_EMPTY_MESSAGE : ERROR_MESSAGES.NAME_NOT_FOUND }
       if (current?.memberId) {
         if (!window.confirm(RENAME_CONFIRM)) return { ok: false, message: '' }
         try {

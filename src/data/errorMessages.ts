@@ -10,3 +10,5 @@ export const ERROR_MESSAGES: Record<RepositoryErrorCode, string> = {
   ADMIN_UNAUTHORIZED: '관리자 비밀번호가 맞지 않아요.',
   UNKNOWN: '연결에 문제가 생겼어요. 잠시 후 다시 시도해 주세요.',
 }
+
+export const ROSTER_EMPTY_MESSAGE = '아직 명단이 등록되지 않았어요. 회장에게 문의해 주세요.'

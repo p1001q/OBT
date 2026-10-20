@@ -11,11 +11,11 @@ import { callRpc as call } from './rpc'
 
 export class SupabaseBoardRepository implements BoardRepository {
   async checkName(name: string): Promise<NameCheck> {
-    const data = (await call('check_name', { p_name: name })) as Partial<NameCheck> | null
+    const data = (await call('check_name', { p_name: name })) as { found?: unknown; day?: unknown; empty?: unknown } | null
     if (typeof data?.found !== 'boolean' || typeof data.day !== 'string') {
       throw new RepositoryError('UNKNOWN', 'Unexpected response shape')
     }
-    return { found: data.found, day: data.day }
+    return { found: data.found, day: data.day, rosterEmpty: data.empty === true }
   }
 
   async getBoard(memberId: string | null): Promise<BoardSnapshot> {

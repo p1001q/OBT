@@ -11,6 +11,8 @@ export interface BoardSnapshot {
 export interface NameCheck {
   found: boolean
   day: string
+  /** 명단이 비어 있는지. 서버가 알려 주지 않으면 false */
+  rosterEmpty: boolean
 }
 
 export interface Registration {

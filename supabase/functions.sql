@@ -54,7 +54,7 @@ $$;
 
 -- ───────────────────────── 사용자 RPC ─────────────────────────
 
--- 이름이 명단에 있는지와 서버의 오늘 날짜를 반환한다. DB에는 아무것도 만들지 않는다.
+-- 이름이 명단에 있는지, 명단이 비어 있는지, 서버의 오늘 날짜를 반환한다. DB에는 아무것도 만들지 않는다.
 create or replace function public.check_name(p_name text)
 returns jsonb
 language plpgsql
@@ -66,6 +66,7 @@ declare
 begin
   return jsonb_build_object(
     'found', v_name <> '' and exists (select 1 from public.roster r where r.name = v_name),
+    'empty', not exists (select 1 from public.roster),
     'day', public.kst_today()
   );
 end;
